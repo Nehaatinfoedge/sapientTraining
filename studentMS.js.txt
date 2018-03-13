@@ -120,13 +120,15 @@ student.prototype.searchStudent = function(student_id){
 		console.log(window.sessionStorage.getItem('student_'+student_id));
 		
 		for(var i=0;i<=student_course_array[student_id].length;i++){
-			console.log('courses allocated to the mentioned student with course id'+student_course_array[student_id][i]+' have the following details \n');
-	
-			console.log(window.sessionStorage.getItem('course_'+student_course_array[student_id][i]));
+			if(student_course_array[student_id][i]!=undefined && student_course_array[student_id][i].length)
+			{			
+				console.log('courses allocated to the mentioned student with course id'+student_course_array[student_id][i]+' have the following details \n');
+				console.log(window.sessionStorage.getItem('course_'+student_course_array[student_id][i]));
+			}
 
-			if(course_fee_array[student_course_array[student_id][i]]!=undefined){
-				console.log('fees associated with course'+ student_course_array[student_id][i] +' for the mentioned student with fee id '+course_fee_array[student_course_array[student_id][i]][i]+'\n');
-				console.log(window.sessionStorage.getItem('fees_'+course_fee_array[student_course_array[student_id][i]][i]));
+			if(course_fee_array[student_course_array[student_id][i]]!=undefined && course_fee_array[student_course_array[student_id][i]].length){
+				console.log('fees associated with course'+ student_course_array[student_id][i] +' for the mentioned student with fee id '+course_fee_array[student_course_array[student_id][i]]+'\n');
+				console.log(window.sessionStorage.getItem('fees_'+course_fee_array[student_course_array[student_id][i]]));
 
 			}
 		
@@ -404,7 +406,34 @@ c1.addCourse();
 var fee1 = new fees('f001','partial','dfjhjf','99909','c002','38912');
 
 fee1.addFees();
+var fee1 = new fees('f002','partial','dfjhjf','9999898','c001','3891209');
+
+fee1.addFees();
 student1.searchStudent('1');
+
+
+output : 
+
+{"name":"neha","mobile":"9899393929","email":"n@gmail.com","username":"nehajain","password":"12345678","address":"delhi","age":"30"}
+VM704:84 {"name":"vikesh","mobile":"9899393929","email":"v@gmail.com","username":"vikesh mittal","password":"12345678","address":"delhi","age":"30"}
+VM704:186 {"name":"english111","year":"2017","type":"BASIC","description":"NULL","course_student_id":"1"}
+VM704:186 {"name":"english","year":"2017","type":"BASIC","description":"NULL","course_student_id":"1"}
+VM704:186 {"name":"english111","year":"2017","type":"BASIC","description":"NULL","course_student_id":"2"}
+VM704:271 {"type":"partial","description":"dfjhjf","amount":"99909","course_id":"c002","total":"38912"}
+VM704:271 {"type":"partial","description":"dfjhjf","amount":"9999898","course_id":"c001","total":"3891209"}
+VM704:120 {"name":"neha","mobile":"9899393929","email":"n@gmail.com","username":"nehajain","password":"12345678","address":"delhi","age":"30"}
+VM704:125 courses allocated to the mentioned student with course idc001 have the following details 
+
+VM704:126 {"name":"english111","year":"2017","type":"BASIC","description":"NULL","course_student_id":"2"}
+VM704:130 fees associated with coursec001 for the mentioned student with fee id f002
+
+VM704:131 {"type":"partial","description":"dfjhjf","amount":"9999898","course_id":"c001","total":"3891209"}
+VM704:125 courses allocated to the mentioned student with course idc002 have the following details 
+
+VM704:126 {"name":"english","year":"2017","type":"BASIC","description":"NULL","course_student_id":"1"}
+VM704:130 fees associated with coursec002 for the mentioned student with fee id f001
+
+VM704:131 {"type":"partial","description":"dfjhjf","amount":"99909","course_id":"c002","total":"38912"}
 
 
 
