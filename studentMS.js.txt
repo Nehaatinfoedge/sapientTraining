@@ -1,7 +1,36 @@
 var studentStack={}
 , courseStack={}
-, feesStack = {};
+, feesStack = {}
+, examStack={};
 function student(student_id,student_name,student_mobile,student_email,student_username,student_password,student_address,student_age){
+	this.validate = function(){
+		if(this.student_id==''){
+			alert('Please enter student id.');
+			return false;
+		}
+		if(this.student_name==''){
+			alert('Please enter student name.');
+			return false;
+		}
+		if(this.student_mobile=='')
+			student_mobile='NULL';
+		if(this.student_email=='')
+			student_email='NULL';
+		if(this.student_username==''){
+			alert('Please enter username.');
+			return false;
+		}
+		if(this.student_password==''){
+			alert('Please enter password.');
+			return false;
+		}
+		if(this.student_address=='')
+			student_address='NULL';
+		if(this.student_age=='')
+			student_age='NULL';
+		return true;	
+	}
+	this.validate();
 	this.id=student_id;
 	this.name=student_name;
 	this.mobile=student_mobile;
@@ -88,6 +117,29 @@ student.prototype.searchStudent = function(student_id){
 };
 
 function course(course_id,course_name,course_year,course_type,course_description,course_student_id){
+	this.validate = function(){
+		if(this.course_id==''){
+			alert('Please enter course id.');
+			return false;
+		}
+		if(this.course_name==''){
+			alert('Please enter course name.');
+			return false;
+		}
+		if(this.course_year=='')
+			course_year='NULL';
+		if(this.course_type=='')
+			course_type='NULL';
+		if(this.course_description=='')
+			course_description = 'null';
+		if(this.course_student_id==''){
+			alert('Please enter COURSE STUDENT ID.');
+			return false;
+		}
+		
+		return true;	
+	}
+	this.validate();
 	this.course_id=course_id;
 	this.course_name=course_name;
 	this.course_year=course_year;
@@ -141,10 +193,37 @@ course.prototype.searchCourse = function(course_id){
 	}
 	if(window.sessionStorage){
 		console.log(window.sessionStorage.getItem('course_'+course_id));
-}
+	}
 };
 
 function fees(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees_total){
+	this.validate = function(){
+		if(this.fees_id==''){
+			alert('Please enter fees id.');
+			return false;
+		}
+		if(this.fees_type==''){
+			alert('Please enter fees type.');
+			return false;
+		}
+		if(this.fees_descriptionr=='')
+			fees_descriptionr='NULL';
+		if(this.fees_amount==''){
+			alert('Please enter fees amount.');
+			return false;
+		}
+		if(this.fees_course_id==''){
+			alert('Please enter fees course id.');
+			return false;
+		}
+		if(this.fees_total==''){
+			alert('Please enter total fees.');
+			return false;
+		}
+		
+		return true;	
+	}
+	this.validate();
 	this.fees_id=fees_id;
 	this.fees_type=fees_type;
 	this.fees_description=fees_description;
@@ -153,7 +232,7 @@ function fees(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees
 	this.fees_total= fees_total;
 };
 
-Fees.prototype.addFees = function(){
+fees.prototype.addFees = function(){
 	feesStack[this.fees_id]={};
 	feesStack [this.fees_id]['type'] = this.fees_type;
 	feesStack [this.fees_id]['description']= this.fees_description;
@@ -181,7 +260,7 @@ fees.prototype.editFees = function(fees_id,fees_type,fees_description,fees_amoun
 	}
 	console.log(window.sessionStorage.getItem('fees_'+fees_id));
 };
-Fees.prototype.deleteFees= function(fees_id){
+fees.prototype.deleteFees= function(fees_id){
 	if(!feesStack.hasOwnProperty(fees_id))
 	{
 		alert('Fees Id does not exist. you can delete existing fees only.');
@@ -198,10 +277,94 @@ fees.prototype.searchFees = function(fees_id){
 	}
 	if(window.sessionStorage){
 		console.log(window.sessionStorage.getItem('fees_'+fees_id));
-}
+	}
 };
 
+function exam(exam_id,exam_name,exam_type,exam_description,exam_date,exam_student_id){
+	this.validate = function(){
+		if(this.exam_id==''){
+			alert('Please enter exam id.');
+			return false;
+		}
+		if(this.exam_type==''){
+			alert('Please enter exam type.');
+			return false;
+		}
+		if(this.exam_name==''){
+			alert('Please enter exam name.');
+			return false;
+		}
+		if(this.exam_description=='')
+			exam_descriptionr='NULL';
+			
+		if(this.exam_date==''){
+			alert('Please enter exam date.');
+			return false;
+		}
+		if(this.exam_student_id==''){
+			alert('Please enter exam student id.');
+			return false;
+		}
+		
+		return true;	
+	}
+	this.validate();
+	this.exam_id=exam_id;
+	this.exam_name=exam_name;
+	this.exam_type=exam_type;
+	this.fees_description=fees_description;
+	this.fees_date=fees_date;
+	this.fees_course_id= fees_course_id;
+	this.exam_student_id= exam_student_id;
+};
 
+exam.prototype.addexam = function(){
+	examStack[this.exam_id]={};
+	examStack [this.exam_id]['exam_name'] = this.exam_name;
+	feesStack [this.exam_id]['exam_type']= this.exam_type;
+	feesStack [this.exam_id]['exam_description'] = this.exam_description;
+	feesStack [this.exam_id]['exam_date'] = this.exam_date;
+	feesStack [this.exam_id]['exam_student_id'] = this.exam_student_id;
+	if(window.sessionStorage){
+		window.sessionStorage.setItem('exam_'+this.exam_id,JSON.stringify(examStack[this.exam_id]));
+	}
+	console.log(window.sessionStorage.getItem('exam_'+this.exam_id));
+};
+fees.prototype.editFees = function(exam_id,exam_name,exam_type,exam_description,exam_date,exam_student_id){
+	if(!examStack.hasOwnProperty(exam_id))
+	{
+		alert('Exam Id does not exist. you can edit existing exam only.');
+		return false;
+	}
+	feesStack[exam_id]['exam_name'] = exam_name;
+	feesStack [exam_id]['exam_type']= fees_type;
+	feesStack [exam_id]['exam_description'] = exam_description;
+	feesStack [exam_id]['exam_date'] = exam_date;
+	feesStack [exam_id]['exam_student_id'] = exam_student_id;
+	if(window.sessionStorage){
+		window.sessionStorage.setItem('exam_'+exam_id,JSON.stringify(examStack[exam_id]));
+	}
+	console.log(window.sessionStorage.getItem('exam_'+exam_id));
+};
+exam.prototype.deleteExam= function(exam_id){
+	if(!examStack.hasOwnProperty(exam_id))
+	{
+		alert('Exam Id does not exist. you can delete existing Exam only.');
+		return false;
+	}
+	delete examStack[exam_id];
+	window.sessionStorage.removeItem('exam_'+exam_id);
+};
+exam.prototype.searchExam = function(exam_id){
+	if(!examStack.hasOwnProperty(exam_id))
+	{
+		alert('Exam Id does not exist. you can search existing exam only.');
+		return false;
+	}
+	if(window.sessionStorage){
+		console.log(window.sessionStorage.getItem('exam_'+exam_id));
+	}
+}
 
 
 
