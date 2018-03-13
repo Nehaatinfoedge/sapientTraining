@@ -1,7 +1,11 @@
 var studentStack={}
+, student_course_array=[]
 , courseStack={}
+, course_fee_array=[]
 , feesStack = {}
 , examStack={};
+
+
 function student(student_id,student_name,student_mobile,student_email,student_username,student_password,student_address,student_age){
 	this.validate = function(){
 		if(this.student_id==''){
@@ -66,6 +70,7 @@ student.prototype.getStudentAge = function(){
 };
 student.prototype.addStudent = function(){
 	studentStack[this.id]={};
+	student_course_array[this.id] = [];
 	studentStack[this.id]['name'] = this.name;
 	studentStack[this.id]['mobile']= this.mobile;
 	studentStack[this.id]['email'] = this.email;
@@ -113,7 +118,22 @@ student.prototype.searchStudent = function(student_id){
 	}
 	if(window.sessionStorage){
 		console.log(window.sessionStorage.getItem('student_'+student_id));
-}
+		
+		for(var i=0;i<=student_course_array[student_id].length;i++){
+			console.log('courses allocated to the mentioned student with course id'+student_course_array[student_id][i]+' have the following details \n');
+	
+			console.log(window.sessionStorage.getItem('course_'+student_course_array[student_id][i]));
+
+			if(course_fee_array[student_course_array[student_id][i]]!=undefined){
+				console.log('fees associated with course'+ student_course_array[student_id][i] +' for the mentioned student with fee id '+course_fee_array[student_course_array[student_id][i]][i]+'\n');
+				console.log(window.sessionStorage.getItem('fees_'+course_fee_array[student_course_array[student_id][i]][i]));
+
+			}
+		
+		}
+		
+
+	}
 };
 
 function course(course_id,course_name,course_year,course_type,course_description,course_student_id){
@@ -150,6 +170,7 @@ function course(course_id,course_name,course_year,course_type,course_description
 
 course.prototype.addCourse = function(){
 	courseStack[this.course_id]={};
+	course_fee_array[this.course_id]=[];
 	courseStack [this.course_id]['name'] = this.course_name;
 	courseStack [this.course_id]['year']= this.course_year;
 	courseStack [this.course_id]['type'] = this.course_type;
@@ -157,6 +178,8 @@ course.prototype.addCourse = function(){
 	courseStack [this.course_id]['course_student_id'] = this.course_student_id;
 	if(window.sessionStorage){
 		window.sessionStorage.setItem('course_'+this.course_id,JSON.stringify(courseStack[this.course_id]));
+		student_course_array[this.course_student_id].push(this.course_id);
+		
 	}
 	console.log(window.sessionStorage.getItem('course_'+this.course_id));
 };
@@ -241,6 +264,7 @@ fees.prototype.addFees = function(){
 	feesStack [this.fees_id]['total'] = this.fees_total;
 	if(window.sessionStorage){
 		window.sessionStorage.setItem('fees_'+this.fees_id,JSON.stringify(feesStack[this.fees_id]));
+		course_fee_array[this.fees_course_id].push(this.fees_id);
 	}
 	console.log(window.sessionStorage.getItem('fees_'+this.fees_id));
 };
@@ -365,6 +389,23 @@ exam.prototype.searchExam = function(exam_id){
 		console.log(window.sessionStorage.getItem('exam_'+exam_id));
 	}
 }
+
+
+var student1=new student('1','neha','9899393929','n@gmail.com','nehajain','12345678','delhi','30');
+student1.addStudent();
+var student2=new student('2','vikesh','9899393929','v@gmail.com','vikesh mittal','12345678','delhi','30');
+student2.addStudent();
+var c1 = new course('c001','english111','2017','BASIC','NULL','1');
+c1.addCourse();
+var c1 = new course('c002','english','2017','BASIC','NULL','1');
+c1.addCourse();
+var c1 = new course('c001','english111','2017','BASIC','NULL','2');
+c1.addCourse();
+var fee1 = new fees('f001','partial','dfjhjf','99909','c002','38912');
+
+fee1.addFees();
+student1.searchStudent('1');
+
 
 
 
