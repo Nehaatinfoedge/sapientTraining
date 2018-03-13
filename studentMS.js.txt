@@ -1,5 +1,6 @@
 var studentStack={}
-, courseStack={};
+, courseStack={}
+, feesStack = {};
 function student(student_id,student_name,student_mobile,student_email,student_username,student_password,student_address,student_age){
 	this.id=student_id;
 	this.name=student_name;
@@ -64,7 +65,7 @@ student.prototype.editStudent = function(student_id,student_name,student_mobile,
 	if(window.sessionStorage){
 		window.sessionStorage.setItem('student_'+student_id,JSON.stringify(studentStack[student_id]));
 	}
-	console.log(window.sessionStorage.getItem('student_'+this.id));
+	console.log(window.sessionStorage.getItem('student_'+student_id));
 };
 student.prototype.deleteStudent = function(student_id){
 	if(!studentStack.hasOwnProperty(student_id))
@@ -121,7 +122,7 @@ course.prototype.editCourse = function(course_id,course_name,course_year,course_
 	if(window.sessionStorage){
 		window.sessionStorage.setItem('course_'+course_id,JSON.stringify(courseStack[course_id]));
 	}
-	console.log(window.sessionStorage.getItem('course_'+this.course_id));
+	console.log(window.sessionStorage.getItem('course_'+course_id));
 };
 course.prototype.deleteCourse= function(course_id){
 	if(!courseStack.hasOwnProperty(course_id))
@@ -142,6 +143,65 @@ course.prototype.searchCourse = function(course_id){
 		console.log(window.sessionStorage.getItem('course_'+course_id));
 }
 };
+
+function fees(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees_total){
+	this.fees_id=fees_id;
+	this.fees_type=fees_type;
+	this.fees_description=fees_description;
+	this.fees_amount=fees_amount;
+	this.fees_course_id= fees_course_id;
+	this.fees_total= fees_total;
+};
+
+Fees.prototype.addFees = function(){
+	feesStack[this.fees_id]={};
+	feesStack [this.fees_id]['type'] = this.fees_type;
+	feesStack [this.fees_id]['description']= this.fees_description;
+	feesStack [this.fees_id]['amount'] = this.fees_amount;
+	feesStack [this.fees_id]['course_id'] = this.fees_course_id;
+	feesStack [this.fees_id]['total'] = this.fees_total;
+	if(window.sessionStorage){
+		window.sessionStorage.setItem('fees_'+this.fees_id,JSON.stringify(feesStack[this.fees_id]));
+	}
+	console.log(window.sessionStorage.getItem('fees_'+this.fees_id));
+};
+fees.prototype.editFees = function(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees_total){
+	if(!feesStack.hasOwnProperty(fees_id))
+	{
+		alert('Fees Id does not exist. you can edit existing fee only.');
+		return false;
+	}
+	feesStack[fees_id]['type'] = fees_type;
+	feesStack [fees_id]['description']= fees_description;
+	feesStack [fees_id]['amount'] = fees_amount;
+	feesStack [fees_id]['course_id'] = fees_course_id;
+	feesStack [fees_id]['total'] = fees_total;
+	if(window.sessionStorage){
+		window.sessionStorage.setItem('fees_'+fees_id,JSON.stringify(feesStack[course_id]));
+	}
+	console.log(window.sessionStorage.getItem('fees_'+fees_id));
+};
+Fees.prototype.deleteFees= function(fees_id){
+	if(!feesStack.hasOwnProperty(fees_id))
+	{
+		alert('Fees Id does not exist. you can delete existing fees only.');
+		return false;
+	}
+	delete feesStack[course_id];
+	window.sessionStorage.removeItem('fees_'+fees_id);
+};
+fees.prototype.searchFees = function(fees_id){
+	if(!feesStack.hasOwnProperty(fees_id))
+	{
+		alert('Fees Id does not exist. you can search existing fees only.');
+		return false;
+	}
+	if(window.sessionStorage){
+		console.log(window.sessionStorage.getItem('fees_'+fees_id));
+}
+};
+
+
 
 
 
