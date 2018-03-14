@@ -1,0 +1,69 @@
+<html>
+<head>
+
+<script type="text/javascript">
+
+	// global variable declaration
+
+	var studentStack={}
+	, student_course_array=[]
+	, courseStack={}
+	, course_fee_array=[]
+	, feesStack = {}
+	, examStack={};
+</script>
+<script src="student.js"></script>
+<script src="course.js"></script>
+<script src="fees.js"></script>
+<script src="exam.js"></script>
+
+<script type="text/javascript">
+
+	var student1=new student('1','neha','9899393929','n@gmail.com','nehajain','12345678','delhi','30');
+	student1.addStudent();
+	var student2=new student('2','vikesh','9899393929','v@gmail.com','vikesh mittal','12345678','delhi','30');
+	student2.addStudent();
+	var c1 = new course('c001','english111','2017','BASIC','NULL','1');
+	c1.addCourse();
+	var c1 = new course('c002','english','2017','BASIC','NULL','1');
+	c1.addCourse();
+	var c1 = new course('c001','english111','2017','BASIC','NULL','2');
+	c1.addCourse();
+	var fee1 = new fees('f001','partial','dfjhjf','99909','c002','38912');
+
+	fee1.addFees();
+	var fee1 = new fees('f002','partial','dfjhjf','9999898','c001','3891209');
+
+	fee1.addFees();
+	student1.searchStudent('1');
+
+
+	output : 
+
+	{"name":"neha","mobile":"9899393929","email":"n@gmail.com","username":"nehajain","password":"12345678","address":"delhi","age":"30"}
+VM704:84 {"name":"vikesh","mobile":"9899393929","email":"v@gmail.com","username":"vikesh mittal","password":"12345678","address":"delhi","age":"30"}
+VM704:186 {"name":"english111","year":"2017","type":"BASIC","description":"NULL","course_student_id":"1"}
+VM704:186 {"name":"english","year":"2017","type":"BASIC","description":"NULL","course_student_id":"1"}
+VM704:186 {"name":"english111","year":"2017","type":"BASIC","description":"NULL","course_student_id":"2"}
+VM704:271 {"type":"partial","description":"dfjhjf","amount":"99909","course_id":"c002","total":"38912"}
+VM704:271 {"type":"partial","description":"dfjhjf","amount":"9999898","course_id":"c001","total":"3891209"}
+VM704:120 {"name":"neha","mobile":"9899393929","email":"n@gmail.com","username":"nehajain","password":"12345678","address":"delhi","age":"30"}
+VM704:125 courses allocated to the mentioned student with course idc001 	have the following details 
+
+VM704:126 {"name":"english111","year":"2017","type":"BASIC","description":"NULL","course_student_id":"2"}
+VM704:130 fees associated with coursec001 for the mentioned student with fee id f002
+
+VM704:131 {"type":"partial","description":"dfjhjf","amount":"9999898","course_id":"c001","total":"3891209"}
+VM704:125 courses allocated to the mentioned student with course idc002 have the following details 
+
+VM704:126 {"name":"english","year":"2017","type":"BASIC","description":"NULL","course_student_id":"1"}
+VM704:130 fees associated with coursec002 for the mentioned student with fee id f001
+
+VM704:131 {"type":"partial","description":"dfjhjf","amount":"99909","course_id":"c002","total":"38912"}
+
+</script>
+</head>
+<body>
+<h1>Welcome to Student Management system</h1>
+</body?
+</html>
