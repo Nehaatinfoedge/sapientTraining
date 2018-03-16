@@ -44,11 +44,15 @@ Fees.prototype.addFees = function(){
 	feesStack [this.fees_id]['total'] = this.fees_total;
 	if(window.sessionStorage){
 		window.sessionStorage.setItem('fees_'+this.fees_id,JSON.stringify(feesStack[this.fees_id]));
-		var course_fee_array = JSON.parse(window.sessionStorage.getItem('course_fee_array'));
-		course_fee_array[this.fees_course_id].push(this.fees_id);
-		window.sessionStorage.setItem('course_fee_array',JSON.stringify(course_fee_array));
+		
+		var course_id=this.fees_course_id;
+		if(JSON.parse(window.sessionStorage.getItem('course_fee_array_')))
+			course_fee_array = JSON.parse(window.sessionStorage.getItem('course_fee_array_'));
+		course_fee_array[course_id]=this.fees_id;
+		window.sessionStorage.setItem('course_fee_array_',JSON.stringify(course_fee_array));
 	}
 	console.log(window.sessionStorage.getItem('fees_'+this.fees_id));
+	$('.alert').show();
 };
 Fees.prototype.editFees = function(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees_total){
 	if(!feesStack.hasOwnProperty(fees_id))

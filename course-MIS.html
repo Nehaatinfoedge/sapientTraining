@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Registration form - Bootsnipp.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+    body{
+    background-color: #525252;
+}
+.centered-form{
+	margin-top: 60px;
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+.home{
+	position:relative;
+	top:-0px;
+	left:300px;
+	cursor:pointer;
+}
+    </style>
+
+<script type="text/javascript" src='js/jquery.min.js'></script>
+<script type="text/javascript" src='js/bootstrap.min.js'></script>
+<link rel="stylesheet" href='css/bootstrap.min.css' media="screen" />
+<script src="js/global.js"></script>
+<script src="js/course.js"></script>
+<script type="text/javascript">
+	function savecourseFrm(){
+		var cid=$('#course_id').val()
+			, cname=$('#course_name').val()
+			, ctype=$('#course_type').val()
+			, cyear=$('#year').val()
+			, csid=$('#course_student_id').val()
+			, cdescription=$('#course_description').val()
+			, courseObj = new Course(cid,cname,cyear,ctype,cdescription,csid);	
+
+		courseObj.addCourse();
+		//window.location.replace("fees-MIS.html");
+		return false;
+	}
+</script>
+</head>
+<body>
+<h1 style="text-align:center;">Welcome to Student Management system</h1>
+	<div class="container">
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Please sign up for Bootsnipp <small>It's free!</small></h3>
+			 			</div>
+			 			<div class="panel-body">
+							<form id="course-frm" role="form" onsubmit="return savecourseFrm();">
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			                			<input type="text" name="course_id" id="course_id" class="form-control input-sm" placeholder="Course Id">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="course_name" id="course_name" class="form-control input-sm" placeholder="Course Name">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="year" id="year" class="form-control input-sm" placeholder="year">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="course_type" id="course_type" class="form-control input-sm" placeholder="Course Type">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="course_student_id" id="course_student_id" class="form-control input-sm" placeholder="course student id">
+			    					</div>
+			    				</div>
+			    			</div>
+
+			    			<div class="form-group">
+			    				<input type="text" name="course_description" id="course_description" class="form-control input-sm" placeholder="Course Description">
+			    			</div>
+			    			
+			    			<input type="submit" value="Register Course" id="register-course-btn" class="btn btn-info btn-block">
+			    			<div>
+			    				<a class="home" href="home.html">Back</a>
+			    			</div>
+			    			<div class="alert alert-success fade in" style="display:none;">
+							    <a href="#" class="close" data-dismiss="alert">&times;</a>
+							    <strong>Success!</strong> Data saved successfully.
+							</div>
+			    		</form>
+			    		</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
+</body>
+</html>

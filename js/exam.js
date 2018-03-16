@@ -65,6 +65,7 @@ Exam.prototype.editFees = function(exam_id,exam_name,exam_type,exam_description,
 		window.sessionStorage.setItem('exam_'+exam_id,JSON.stringify(examStack[exam_id]));
 	}
 	console.log(window.sessionStorage.getItem('exam_'+exam_id));
+	$('.alert').show();
 };
 Exam.prototype.deleteExam= function(exam_id){
 	if(!examStack.hasOwnProperty(exam_id))

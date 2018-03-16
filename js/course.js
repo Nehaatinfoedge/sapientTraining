@@ -33,7 +33,8 @@ function Course(course_id,course_name,course_year,course_type,course_description
 
 Course.prototype.addCourse = function(){
 	courseStack[this.course_id]={};
-	course_fee_array[this.course_id]=[];
+	var course_id=this.course_id;
+	
 	courseStack [this.course_id]['name'] = this.course_name;
 	courseStack [this.course_id]['year']= this.course_year;
 	courseStack [this.course_id]['type'] = this.course_type;
@@ -41,10 +42,15 @@ Course.prototype.addCourse = function(){
 	courseStack [this.course_id]['course_student_id'] = this.course_student_id;
 	if(window.sessionStorage){
 		window.sessionStorage.setItem('course_'+this.course_id,JSON.stringify(courseStack[this.course_id]));
-		student_course_array[this.course_student_id].push(this.course_id);
+		var student_course_array = JSON.parse(window.sessionStorage.getItem('student_course_array'));
+		var sid = this.course_student_id;
+		student_course_array[sid].push(this.course_id);
+		window.sessionStorage.setItem('student_course_array',JSON.stringify(student_course_array));
+		
 		
 	}
 	console.log(window.sessionStorage.getItem('course_'+this.course_id));
+	$('.alert').show();
 };
 Course.prototype.editCourse = function(course_id,course_name,course_year,course_type,course_description,course_student_id){
 	if(!courseStack.hasOwnProperty(course_id))
@@ -81,17 +87,3 @@ Course.prototype.searchCourse = function(course_id){
 		console.log(window.sessionStorage.getItem('course_'+course_id));
 	}
 };
-
-$('#register-course-btn').click(function(){
-	var cid=$('#course_id').val()
-		, cname=$('#course_name').val()
-		, ctype=$('#course_type').val()
-		, cyear=$('#year').val()
-		, csid=$('#course_student_id').val()
-		, cdescription=$('#course_description').val()
-		, courseObj = new Course(cid,cname,cyear,ctype,cdescription,csid);	
-
-	courseObj.addCousre();
-	$('#course-frm').hide();
-	$('#fees-frm').show();
-});

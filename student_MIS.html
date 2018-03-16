@@ -1,27 +1,55 @@
-<html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Registration form - Bootsnipp.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+    body{
+    background-color: #525252;
+}
+.centered-form{
+	margin-top: 60px;
+}
 
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+.home{
+	position:relative;
+	top:-0px;
+	left:300px;
+	cursor:pointer;
+}
+    </style>
+
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script> -->
+<script type="text/javascript" src='js/jquery.min.js'></script>
+<script type="text/javascript" src='js/bootstrap.min.js'></script>
+<link rel="stylesheet" href='css/bootstrap.min.css' media="screen" />
+<script src="js/global.js"></script>
+<script src="js/student.js"></script>
 <script type="text/javascript">
 
-	// global variable declaration
+	function saveStudentFrm(){
+		var id=$('#student_id').val()
+			, name=$('#student_name').val()
+			, mobile=$('#studemt_mobile').val()
+			, email=$('#student_email').val()
+			, address=$('#address').val()
+			, username=$('#username').val()
+			, password=$('#password').val()
+			, confirm_password=$('#password_confirmation').val()
+			, age=$('#age').val()
+			, studentObj = new Student(id,name,mobile,email,username,password,address,age);	
 
-	var studentStack={}
-	, student_course_array=[]
-	, courseStack={}
-	, course_fee_array=[]
-	, feesStack = {}
-	, examStack={};
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script>
-<script src="student.js"></script>
-<script src="course.js"></script>
-<script src="fees.js"></script>
-<script src="exam.js"></script>
-
-
-<script type="text/javascript">
-
-	var student1=new student('1','neha','9899393929','n@gmail.com','nehajain','12345678','delhi','30');
+		studentObj.addStudent();
+		//window.location.replace("course-MIS.html");
+		return false;
+	}
+	/*var student1=new student('1','neha','9899393929','n@gmail.com','nehajain','12345678','delhi','30');
 	student1.addStudent();
 	var student2=new student('2','vikesh','9899393929','v@gmail.com','vikesh mittal','12345678','delhi','30');
 	student2.addStudent();
@@ -37,7 +65,7 @@
 	var fee1 = new fees('f002','partial','dfjhjf','9999898','c001','3891209');
 
 	fee1.addFees();
-	student1.searchStudent('1');
+	student1.searchStudent('1');*/
 
 
 	/*output : 
@@ -66,6 +94,79 @@ VM704:131 {"type":"partial","description":"dfjhjf","amount":"99909","course_id":
 </script>
 </head>
 <body>
-<h1>Welcome to Student Management system</h1>
-</body?
+<h1 style="text-align:center;">Welcome to Student Management system</h1>
+	<div class="container">
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Please sign up for Bootsnipp <small>It's free!</small></h3>
+			 			</div>
+			 			<div class="panel-body">
+			    		<form id="register-frm" role="form" onsubmit="return saveStudentFrm();">
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			                			<input type="text" name="student_id" id="student_id" class="form-control input-sm" placeholder="Student Id">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="student_name" id="student_name" class="form-control input-sm" placeholder="Student Name">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="student_mobile" id="student_mobile" class="form-control input-sm" placeholder="Student Mobile">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="email" name="student_email" id="student_email" class="form-control input-sm" placeholder="Student Email">
+			    					</div>
+			    				</div>
+			    			</div>
+
+			    			<div class="form-group">
+			    				<input type="text" name="address" id="address" class="form-control input-sm" placeholder="Student Address">
+			    			</div>
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="username" id="username" class="form-control input-sm" placeholder="Student UserName">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="age" id="age" class="form-control input-sm" placeholder="Student Age">
+			    					</div>
+			    				</div>
+			    			</div>
+			    			
+			    			<input type="submit" value="Register" id="register-btn" class="btn btn-info btn-block">
+			    			<div>
+			    				<a class="home" href="home.html">Back</a>
+			    			</div>
+			    			<div class="alert alert-success fade in" style="display:none;">
+							    <a href="#" class="close" data-dismiss="alert">&times;</a>
+							    <strong>Success!</strong> Data saved successfully.
+							</div>
+			    		</form>
+			    	</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
+</body>
 </html>

@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Registration form - Bootsnipp.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+    body{
+    background-color: #525252;
+}
+.centered-form{
+	margin-top: 60px;
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+    </style>
+
+<script type="text/javascript" src='js/jquery.min.js'></script>
+<script type="text/javascript" src='js/bootstrap.min.js'></script>
+<link rel="stylesheet" href='css/bootstrap.min.css' media="screen" />
+<script src="js/global.js"></script>
+<script src="js/student.js"></script>
+<script src="js/course.js"></script>
+<script src="js/fees.js"></script>
+<script src="js/exam.js"></script>
+<script type="text/javascript">
+
+	function savecourseFrm(){
+		var cid=$('#course_id').val()
+			, cname=$('#course_name').val()
+			, ctype=$('#course_type').val()
+			, cyear=$('#year').val()
+			, csid=$('#course_student_id').val()
+			, cdescription=$('#course_description').val()
+			, courseObj = new Course(cid,cname,cyear,ctype,cdescription,csid);	
+
+		courseObj.addCousre();
+		window.location.replace("fees-MIS.html");
+		return false;
+	}
+</script>
+</head>
+<body>
+<h1 style="text-align:center;">Welcome to Student Management system</h1>
+	<div class="container">
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Please sign up for Bootsnipp <small>It's free!</small></h3>
+			 			</div>
+			 			<div class="panel-body">
+							<ul>
+								<li>
+									<a href="student_MIS.html" style="cursor:pointer;">Register Student</a>
+								</li>
+								<li>
+									<a href="course-MIS.html" style="cursor:pointer;">Register Course</a>
+								</li>
+								<li>
+									<a href="fees-MIS.html" style="cursor:pointer;">Register Fees</a>
+								</li>
+								<li>
+									<a href="exam-MIS.html" style="cursor:pointer;">Register Exam</a>
+								</li>
+								<li>
+									<a href="search-student.html" style="cursor:pointer;">Search Student</a>
+								</li>
+							</ul>
+			    		</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
+</body>
+</html>
