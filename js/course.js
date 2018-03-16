@@ -1,3 +1,6 @@
+var  courseStack={}
+	, course_fee_array={};
+	
 function Course(course_id,course_name,course_year,course_type,course_description,course_student_id){
 	this.validate = function(){
 		if(this.course_id==''){

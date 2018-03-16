@@ -1,3 +1,5 @@
+var examStack={};
+
 function Exam(exam_id,exam_name,exam_type,exam_description,exam_date,exam_student_id){
 	this.validate = function(){
 		if(this.exam_id==''){

@@ -45,23 +45,42 @@
 					if(value!=undefined)
 					{			
 
-						
-						for(var i=0;i<value.length;i++){
-							$('.out').append("courses allocated to the mentioned student with course id "+value[i] +"have the following details \n"+ window.sessionStorage.getItem('course_'+value[i])+"\n");
-							console.log('courses allocated to the mentioned student with course id '+value[i]+' have the following details \n');
-							console.log(window.sessionStorage.getItem('course_'+value[i]));
+						if(value instanceof Array){
+							for(var i=0;i< value.length;i++){
+								$('.out').append("courses allocated to the mentioned student with course id "+value[i] +"have the following details \n"+ window.sessionStorage.getItem('course_'+value[i])+"\n");
+								console.log('courses allocated to the mentioned student with course id '+value[i]+' have the following details \n');
+								console.log(window.sessionStorage.getItem('course_'+value[i]));
+
+								var course_fee_array = JSON.parse(window.sessionStorage.getItem('course_fee_array_'));
+								if(course_fee_array[value[i]]!=undefined){
+									$.each(course_fee_array,function(index,val){
+										console.log('fees associated with course'+ value[i] +' for the mentioned student with fee id '+val+'\n');
+										console.log(window.sessionStorage.getItem('fees_'+val));
+										$('.out').append("fees associated with course "+ value[i] +" for the mentioned student with fee id "+val+"\n"+
+											window.sessionStorage.getItem('fees_'+val));
+
+									});
+
+								}
+							}
+						}
+						else{
+							$('.out').append("courses allocated to the mentioned student with course id "+value +"have the following details \n"+ window.sessionStorage.getItem('course_'+value)+"\n");
+							console.log('courses allocated to the mentioned student with course id '+value+' have the following details \n');
+							console.log(window.sessionStorage.getItem('course_'+value));
 
 							var course_fee_array = JSON.parse(window.sessionStorage.getItem('course_fee_array_'));
-							if(course_fee_array[value[i]]!=undefined){
+							if(course_fee_array[value]!=undefined){
 								$.each(course_fee_array,function(index,val){
-									console.log('fees associated with course'+ value[i] +' for the mentioned student with fee id '+val+'\n');
+									console.log('fees associated with course'+ value +' for the mentioned student with fee id '+val+'\n');
 									console.log(window.sessionStorage.getItem('fees_'+val));
-									$('.out').append("fees associated with course "+ value[i] +" for the mentioned student with fee id "+val+"\n"+
+									$('.out').append("fees associated with course "+ value +" for the mentioned student with fee id "+val+"\n"+
 										window.sessionStorage.getItem('fees_'+val));
 
 								});
 
 							}
+
 						}
 					}
 					

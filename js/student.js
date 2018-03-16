@@ -1,5 +1,7 @@
 
-	
+	var studentStack={}
+		, student_course_array={};
+
 	function Student(student_id,student_name,student_mobile,student_email,student_username,student_password,student_address,student_age){
 		this.validate = function(){
 			if(this.student_id==''){
@@ -120,7 +122,7 @@
 		if(window.sessionStorage){
 			console.log(window.sessionStorage.getItem('student_'+student_id));
 			
-			for(var i=0;i<=student_course_array[student_id].length;i++){
+			for(var i=0;i<student_course_array[student_id].length;i++){
 				if(student_course_array[student_id][i]!=undefined && student_course_array[student_id][i].length)
 				{			
 					console.log('courses allocated to the mentioned student with course id'+student_course_array[student_id][i]+' have the following details \n');

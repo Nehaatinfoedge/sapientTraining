@@ -1,3 +1,5 @@
+var feesStack = {};
+
 function Fees(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees_total){
 	this.validate = function(){
 		if(this.fees_id==''){
