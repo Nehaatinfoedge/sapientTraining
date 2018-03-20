@@ -4,97 +4,16 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Registration form - Bootsnipp.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style type="text/css">
-    body{
-    background-color: #525252;
-}
-.centered-form{
-	margin-top: 60px;
-}
-
-.centered-form .panel{
-	background: rgba(255, 255, 255, 0.8);
-	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
-}
-.home{
-	position:relative;
-	top:-0px;
-	left:300px;
-	cursor:pointer;
-}
-    </style>
-
-
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script> -->
 <script type="text/javascript" src='js/jquery.min.js'></script>
 <script type="text/javascript" src='js/bootstrap.min.js'></script>
 <link rel="stylesheet" href='css/bootstrap.min.css' media="screen" />
+<link rel="stylesheet" href='css/base.css' media="screen" />
 <script src="js/global.js"></script>
 <script src="js/student.js"></script>
-<script type="text/javascript">
-
-	function saveStudentFrm(){
-		var id=$('#student_id').val()
-			, name=$('#student_name').val()
-			, mobile=$('#studemt_mobile').val()
-			, email=$('#student_email').val()
-			, address=$('#address').val()
-			, username=$('#username').val()
-			, password=$('#password').val()
-			, confirm_password=$('#password_confirmation').val()
-			, age=$('#age').val()
-			, studentObj = new Student(id,name,mobile,email,username,password,address,age);	
-
-		studentObj.addStudent();
-		//window.location.replace("course-MIS.html");
-		return false;
-	}
-	/*var student1=new student('1','neha','9899393929','n@gmail.com','nehajain','12345678','delhi','30');
-	student1.addStudent();
-	var student2=new student('2','vikesh','9899393929','v@gmail.com','vikesh mittal','12345678','delhi','30');
-	student2.addStudent();
-	var c1 = new course('c001','english111','2017','BASIC','NULL','1');
-	c1.addCourse();
-	var c1 = new course('c002','english','2017','BASIC','NULL','1');
-	c1.addCourse();
-	var c1 = new course('c001','english111','2017','BASIC','NULL','2');
-	c1.addCourse();
-	var fee1 = new fees('f001','partial','dfjhjf','99909','c002','38912');
-
-	fee1.addFees();
-	var fee1 = new fees('f002','partial','dfjhjf','9999898','c001','3891209');
-
-	fee1.addFees();
-	student1.searchStudent('1');*/
-
-
-	/*output : 
-
-	{"name":"neha","mobile":"9899393929","email":"n@gmail.com","username":"nehajain","password":"12345678","address":"delhi","age":"30"}
-VM704:84 {"name":"vikesh","mobile":"9899393929","email":"v@gmail.com","username":"vikesh mittal","password":"12345678","address":"delhi","age":"30"}
-VM704:186 {"name":"english111","year":"2017","type":"BASIC","description":"NULL","course_student_id":"1"}
-VM704:186 {"name":"english","year":"2017","type":"BASIC","description":"NULL","course_student_id":"1"}
-VM704:186 {"name":"english111","year":"2017","type":"BASIC","description":"NULL","course_student_id":"2"}
-VM704:271 {"type":"partial","description":"dfjhjf","amount":"99909","course_id":"c002","total":"38912"}
-VM704:271 {"type":"partial","description":"dfjhjf","amount":"9999898","course_id":"c001","total":"3891209"}
-VM704:120 {"name":"neha","mobile":"9899393929","email":"n@gmail.com","username":"nehajain","password":"12345678","address":"delhi","age":"30"}
-VM704:125 courses allocated to the mentioned student with course idc001 	have the following details 
-
-VM704:126 {"name":"english111","year":"2017","type":"BASIC","description":"NULL","course_student_id":"2"}
-VM704:130 fees associated with coursec001 for the mentioned student with fee id f002
-
-VM704:131 {"type":"partial","description":"dfjhjf","amount":"9999898","course_id":"c001","total":"3891209"}
-VM704:125 courses allocated to the mentioned student with course idc002 have the following details 
-
-VM704:126 {"name":"english","year":"2017","type":"BASIC","description":"NULL","course_student_id":"1"}
-VM704:130 fees associated with coursec002 for the mentioned student with fee id f001
-
-VM704:131 {"type":"partial","description":"dfjhjf","amount":"99909","course_id":"c002","total":"38912"}
-*/
-</script>
 </head>
 <body>
-<h1 style="text-align:center;">Welcome to Student Management system</h1>
+<h1 class="ac">Welcome to Student Management system</h1>
 	<div class="container">
         <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">

@@ -1,4 +1,5 @@
-var feesStack = {};
+var feesStack = {}
+, course_fee_array={};
 
 function Fees(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees_total){
 	this.validate = function(){
@@ -34,6 +35,7 @@ function Fees(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees
 		this.fees_amount=fees_amount;
 		this.fees_course_id= fees_course_id;
 		this.fees_total= fees_total;
+		this.addFees();
 	}
 };
 
@@ -91,3 +93,15 @@ Fees.prototype.searchFees = function(fees_id){
 		console.log(window.sessionStorage.getItem('fees_'+fees_id));
 	}
 };
+function saveFeesFrm(){
+	var fid=$('#fees_id').val()
+		, ftype=$('#fees_type').val()
+		, fdescription=$('#fees_description').val()
+		, famount=$('#fees_amount').val()
+		, ftotal=$('#fees_total').val()
+		, fcourseid=$('#fees_course_id').val()
+		, feesObj = new Fees(fid,ftype,fdescription,famount,fcourseid,ftotal);	
+
+	//esObj.addFees();
+	return false;
+}

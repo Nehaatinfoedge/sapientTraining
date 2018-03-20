@@ -39,6 +39,7 @@
 			this.password=student_password;
 			this.address=student_address;
 			this.age=student_age;
+			this.addStudent();  // this will add student details if validations all pass easily.
 		}
 	}
 	Student.prototype.getStudentId = function(){
@@ -140,6 +141,23 @@
 
 		}
 	};
+
+	function saveStudentFrm(){
+		var id=$('#student_id').val()
+			, name=$('#student_name').val()
+			, mobile=$('#studemt_mobile').val()
+			, email=$('#student_email').val()
+			, address=$('#address').val()
+			, username=$('#username').val()
+			, password=$('#password').val()
+			, confirm_password=$('#password_confirmation').val()
+			, age=$('#age').val()
+			, studentObj = new Student(id,name,mobile,email,username,password,address,age);	
+
+		//studentObj.addStudent();
+		//window.location.replace("course-MIS.html");
+		return false;
+	}
 
 
 	

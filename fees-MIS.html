@@ -4,45 +4,14 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Registration form - Bootsnipp.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style type="text/css">
-    body{
-    background-color: #525252;
-}
-.centered-form{
-	margin-top: 60px;
-}
-
-.centered-form .panel{
-	background: rgba(255, 255, 255, 0.8);
-	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
-}
-.home{
-	position:relative;
-	top:10px;
-	left:300px;
-	cursor:pointer;
-}
-    </style>
-
 <script type="text/javascript" src='js/jquery.min.js'></script>
 <script type="text/javascript" src='js/bootstrap.min.js'></script>
 <link rel="stylesheet" href='css/bootstrap.min.css' media="screen" />
+<link rel="stylesheet" href='css/base.css' media="screen" />
 <script src="js/global.js"></script>
 <script src="js/fees.js"></script>
 <script type="text/javascript">
-	function saveFeesFrm(){
-		var fid=$('#fees_id').val()
-			, ftype=$('#fees_type').val()
-			, fdescription=$('#fees_description').val()
-			, famount=$('#fees_amount').val()
-			, ftotal=$('#fees_total').val()
-			, fcourseid=$('#fees_course_id').val()
-			, feesObj = new Fees(fid,ftype,fdescription,famount,fcourseid,ftotal);	
-
-		feesObj.addFees();
-		//window.location.replace("exam-MIS.html");
-		return false;
-	}
+	
 </script>
 </head>
 <body>

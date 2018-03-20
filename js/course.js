@@ -1,6 +1,6 @@
 var  courseStack={}
 	, course_fee_array={};
-	
+
 function Course(course_id,course_name,course_year,course_type,course_description,course_student_id){
 	this.validate = function(){
 		if(this.course_id==''){
@@ -31,6 +31,7 @@ function Course(course_id,course_name,course_year,course_type,course_description
 		this.course_type=course_type;
 		this.course_description= course_description;
 		this. course_student_id = course_student_id;
+		this.addCourse();
 	}
 };
 
@@ -90,3 +91,15 @@ Course.prototype.searchCourse = function(course_id){
 		console.log(window.sessionStorage.getItem('course_'+course_id));
 	}
 };
+function savecourseFrm(){
+	var cid=$('#course_id').val()
+		, cname=$('#course_name').val()
+		, ctype=$('#course_type').val()
+		, cyear=$('#year').val()
+		, csid=$('#course_student_id').val()
+		, cdescription=$('#course_description').val()
+		, courseObj = new Course(cid,cname,cyear,ctype,cdescription,csid);	
+
+	//courseObj.addCourse();
+	return false;
+}

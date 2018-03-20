@@ -4,102 +4,14 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Registration form - Bootsnipp.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style type="text/css">
-    body{
-    background-color: #525252;
-}
-.centered-form{
-	margin-top: 60px;
-}
-
-.centered-form .panel{
-	background: rgba(255, 255, 255, 0.8);
-	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
-}
-.home{
-	position:relative;
-	top:-0px;
-	left:300px;
-	cursor:pointer;
-}
-    </style>
-
 <script type="text/javascript" src='js/jquery.min.js'></script>
 <script type="text/javascript" src='js/bootstrap.min.js'></script>
 <link rel="stylesheet" href='css/bootstrap.min.css' media="screen" />
-<script type="text/javascript">
-	function searchStudenMain(){
-		if(JSON.parse((sessionStorage.getItem('student_'+$('#student_id').val())))==undefined)
-		{
-			alert('Student Id does not exist. you can search existing student only.');
-			return false;
-		}
-		$('.alert').show();
-		if(window.sessionStorage){
-			
-			var student_course_array = JSON.parse(window.sessionStorage.getItem('student_course_array'));
-			if(student_course_array.hasOwnProperty($('#student_id').val()) && student_course_array[$('#student_id').val()].length){
-				console.log(window.sessionStorage.getItem('student_'+$('#student_id').val()));
-				$('.out').append("Student details are the following:"+window.sessionStorage.getItem('student_'+$('#student_id').val()));
-				$.each(student_course_array[$('#student_id').val()],function(key,value){
-					if(value!=undefined)
-					{			
-
-						if(value instanceof Array){
-							for(var i=0;i< value.length;i++){
-								$('.out').append("courses allocated to the mentioned student with course id "+value[i] +"have the following details \n"+ window.sessionStorage.getItem('course_'+value[i])+"\n");
-								console.log('courses allocated to the mentioned student with course id '+value[i]+' have the following details \n');
-								console.log(window.sessionStorage.getItem('course_'+value[i]));
-
-								var course_fee_array = JSON.parse(window.sessionStorage.getItem('course_fee_array_'));
-								if(course_fee_array[value[i]]!=undefined){
-									$.each(course_fee_array,function(index,val){
-										console.log('fees associated with course'+ value[i] +' for the mentioned student with fee id '+val+'\n');
-										console.log(window.sessionStorage.getItem('fees_'+val));
-										$('.out').append("fees associated with course "+ value[i] +" for the mentioned student with fee id "+val+"\n"+
-											window.sessionStorage.getItem('fees_'+val));
-
-									});
-
-								}
-							}
-						}
-						else{
-							$('.out').append("courses allocated to the mentioned student with course id "+value +"have the following details \n"+ window.sessionStorage.getItem('course_'+value)+"\n");
-							console.log('courses allocated to the mentioned student with course id '+value+' have the following details \n');
-							console.log(window.sessionStorage.getItem('course_'+value));
-
-							var course_fee_array = JSON.parse(window.sessionStorage.getItem('course_fee_array_'));
-							if(course_fee_array[value]!=undefined){
-								$.each(course_fee_array,function(index,val){
-									console.log('fees associated with course'+ value +' for the mentioned student with fee id '+val+'\n');
-									console.log(window.sessionStorage.getItem('fees_'+val));
-									$('.out').append("fees associated with course "+ value +" for the mentioned student with fee id "+val+"\n"+
-										window.sessionStorage.getItem('fees_'+val));
-
-								});
-
-							}
-
-						}
-					}
-					
-				});
-			
-			}
-			else {
-				$('.out').append("Student details are the following:"+window.sessionStorage.getItem('student_'+$('#student_id').val()));
-				$('.out').append("No Data Available.");
-			}
-			
-
-		}
-		return false;
-	}
-</script>
+<script type="text/javascript" src='js/search-studnet.js'></script>
+<link rel="stylesheet" href='css/base.css' media="screen" />
 </head>
 <body>
-<h1 style="text-align:center;">Welcome to Student Management system</h1>
+<h1 class="ac">Welcome to Student Management system</h1>
 	<div class="container">
         <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
