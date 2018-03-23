@@ -620,3 +620,24 @@ if (![].values) {
    return a;
    };
 }
+
+The constructor object has its properties and methods defined with the keyword 'this' in front of it, whereas the literal version does not.
+In the constructor object the properties/methods have their 'values' defined after an equal sign '=' whereas in the literal version, they are defined after a colon ':'.
+The constructor function can have (optional) semi-colons ';' at the end of each property/method declaration whereas in the literal version if you have more than one property or method, they MUST be separated with a comma ',', and they CANNOT have semi-colons after them, otherwise JavaScript will return an error.
+Defining Methods and Properties
+Constructor version:
+
+function myObject(){
+    this.iAm = 'an object';
+    this.whatAmI = function(){
+        alert('I am ' + this.iAm);
+    };
+};
+Literal version:
+
+var myObject = {
+    iAm : 'an object',
+    whatAmI : function(){
+        alert('I am ' + this.iAm);
+    }
+}
