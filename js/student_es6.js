@@ -99,16 +99,17 @@
 			if(window.sessionStorage){
 				console.log(window.sessionStorage.getItem('student_'+student_id));
 				
-				for(var i=0;i<student_course_array[student_id].length;i++){
-					if(student_course_array[student_id][i]!=undefined && student_course_array[student_id][i].length)
+				const student_course_arr = student_course_array[student_id];
+				for(const[index,elem] of student_course_arr.entries()){
+					if(elem!=undefined && elem.entries())
 					{			
-						console.log('courses allocated to the mentioned student with course id'+student_course_array[student_id][i]+' have the following details \n');
-						console.log(window.sessionStorage.getItem('course_'+student_course_array[student_id][i]));
+						console.log('courses allocated to the mentioned student with course id '+elem+' have the following details \n');
+						console.log(window.sessionStorage.getItem('course_'+elem));
 					}
-
-					if(course_fee_array[student_course_array[student_id][i]]!=undefined && course_fee_array[student_course_array[student_id][i]].length){
-						console.log('fees associated with course'+ student_course_array[student_id][i] +' for the mentioned student with fee id '+course_fee_array[student_course_array[student_id][i]]+'\n');
-						console.log(window.sessionStorage.getItem('fees_'+course_fee_array[student_course_array[student_id][i]]));
+					const course_fee_arr = course_fee_array[elem]; 
+					if(course_fee_arr!=undefined && course_fee_arr.entries()){
+						console.log('fees associated with course'+ elem +' for the mentioned student with fee id '+course_fee_array[elem]+'\n');
+						console.log(window.sessionStorage.getItem('fees_'+course_fee_array[item]));
 
 					}
 				
