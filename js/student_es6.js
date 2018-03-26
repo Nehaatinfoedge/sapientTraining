@@ -84,7 +84,7 @@
 		deletStudent(student_id){
 			if(!studentStack.hasOwnProperty(student_id))
 			{
-				alert('Student Id does not exist. you can delete existing student only.');
+				console.log('Student Id does not exist. you can delete existing student only.');
 				return false;
 			}
 			delete studentStack[student_id];
@@ -93,7 +93,7 @@
 		searchStudent(student_id){
 			if(!studentStack.hasOwnProperty(student_id))
 			{
-				alert('Student Id does not exist. you can search existing student only.');
+				console.log('Student Id does not exist. you can search existing student only.');
 				return false;
 			}
 			if(window.sessionStorage){
