@@ -129,8 +129,5 @@
 			, confirm_password=$('#password_confirmation').val()
 			, age=$('#age').val()
 			, studentObj = new Student(id,name,mobile,email,username,password,address,age);	
-
-		//studentObj.addStudent();
-		//window.location.replace("course-MIS.html");
 		return false;
 	}

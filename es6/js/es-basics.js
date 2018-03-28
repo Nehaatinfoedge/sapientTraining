@@ -467,3 +467,30 @@ The syntax for importing modules as objects looks as follows (line A):
 import * as lib from 'lib'; // (A)
 console.log(lib.square(11)); // 121
 console.log(lib.diag(4, 3)); // 5
+
+const first = 'Jane';
+const last = 'Doe';
+
+const obj = { first, last };
+// Same as:
+const obj = { first: first, last: last };
+Computed property keys:
+
+const propKey = 'foo';
+const obj = {
+    [propKey]: true,
+    ['b'+'ar']: 123
+};
+This new syntax can also be used for method definitions:
+
+const obj = {
+    ['h'+'ello']() {
+        return 'hi';
+    }
+};
+console.log(obj.hello()); // hi
+
+const obj = { foo: 123 };
+Object.assign(obj, { bar: true });
+console.log(JSON.stringify(obj));
+    // {"foo":123,"bar":true}

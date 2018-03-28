@@ -2,14 +2,16 @@ var feesStack = {}
 , course_fee_array={};
 
 class Fees {
-	if(this.validate(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees_total)){
-		this.fees_id=fees_id;
-		this.fees_type=fees_type;
-		this.fees_description=fees_description;
-		this.fees_amount=fees_amount;
-		this.fees_course_id= fees_course_id;
-		this.fees_total= fees_total;
-		this.addFees();
+	constructor(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees_total){
+		if(this.validate(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees_total)){
+			this.fees_id=fees_id;
+			this.fees_type=fees_type;
+			this.fees_description=fees_description;
+			this.fees_amount=fees_amount;
+			this.fees_course_id= fees_course_id;
+			this.fees_total= fees_total;
+			this.addFees();
+		}
 	}
 	validate(fees_id,fees_type,fees_description,fees_amount,fees_course_id,fees_total){
 		if(fees_id==''){
@@ -20,8 +22,8 @@ class Fees {
 			console.log('Please enter fees type.');
 			return false;
 		}
-		if(fees_descriptionr=='')
-			fees_descriptionr='NULL';
+		if(fees_description=='')
+			fees_description='NULL';
 		if(fees_amount==''){
 			console.log('Please enter fees amount.');
 			return false;
