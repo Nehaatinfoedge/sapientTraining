@@ -494,3 +494,21 @@ const obj = { foo: 123 };
 Object.assign(obj, { bar: true });
 console.log(JSON.stringify(obj));
     // {"foo":123,"bar":true}
+
+/** Generator functions*/
+function* f(obj){
+    for (const key in obj){
+        if(obj.hasOwnProperty(key)){
+            yield {
+                    key,    
+                    val:obj[key]};
+            };
+    }
+};
+const arr = {'a':'a1','b':'b1'};
+
+for(let i of f(arr)){
+    console.log('key'+i.key);
+    console.log('value'+i.val);
+}
+
