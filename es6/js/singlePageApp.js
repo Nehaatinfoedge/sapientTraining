@@ -20,15 +20,21 @@ function createUser(){
 
 }
 function signIn(){
-	var userExist =  specificUser($('#inputEmail').val());
-	if(userExist){
-		window.location.replace("user-list.html");
-		return false;
-	}
-	else{
-		window.location.replace("create-user.html");
-		return false;
-	}
+	specificUser($('#inputEmail').val()).
+	then((response)=>{
+		if(response.hasOwnProperty($('#inputEmail').val())){
+			window.location = "user-list.html";
+			return false;
+		}
+		else{
+			window.location = "create-user.html";
+			return false;
+		}
+	})
+	.catch((err)=>{
+			
+			
+	});
 
 }
 function getUserList(){
@@ -55,9 +61,11 @@ function getUsers(){
 	return false;
 }
 function specificUser(email){
-	var data = getUserList();
-	if(data.hasOwnProperty(email)){
-		return true;
-	}
-	return false;
+	const p = new Promise((resolve,reject)=>{
+		var data = getUserList();
+		resolve(data);
+	});
+	
+	return p;
+	
 }
