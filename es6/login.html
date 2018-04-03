@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Registration form - Bootsnipp.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script> -->
+<script type="text/javascript" src='../js/jquery.min.js'></script>
+<script type="text/javascript" src='../js/bootstrap.min.js'></script>
+<link rel="stylesheet" href='../css/bootstrap.min.css' media="screen" />
+<link rel="stylesheet" href='../css/base.css' media="screen" />
+<script src="../es6/js/singlePageApp.js"></script>
+</head>
+<body>
+<div class="container">
+	<form name = "loginForm" onsubmit = "return signIn()">
+        <h2>Please sign in</h2>
+	        <div class="row form-group">
+	        	<div class="col-md-5 col-sm-5">
+		        	<label>Email address</label>
+		        	<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="true"/>
+	        	</div>
+	        </div>
+	        <div class="row form-group">
+	        	<div class="col-md-5 col-sm-5">
+		        	<label>Password</label>
+		        	<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="true">
+	        	</div>
+	        </div>
+	        <div class="row form-group">
+	        	<div class="col-md-5 col-sm-5">
+		        	<button class="btn btn-lg btn-primary" type="submit" value="SignIn">Sign in</button>
+	        	</div>
+	        </div>
+     </form>
+</div>
+</body>
+</html>

@@ -5,44 +5,44 @@
 <title>Registration form - Bootsnipp.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js"></script> -->
-<script type="text/javascript" src='../es6/js/jquery.min.js'></script>
-<script type="text/javascript" src='../es6/js/bootstrap.min.js'></script>
-<link rel="stylesheet" href='../es6/css/bootstrap.min.css' media="screen" />
-<link rel="stylesheet" href='../es6/css/base.css' media="screen" />
-<script src="../es6/js/create-user.js"></script>
+<script type="text/javascript" src='../js/jquery.min.js'></script>
+<script type="text/javascript" src='../js/bootstrap.min.js'></script>
+<link rel="stylesheet" href='../css/bootstrap.min.css' media="screen" />
+<link rel="stylesheet" href='../css/base.css' media="screen" />
+<script src="../es6/js/singlePageApp.js"></script>
 </head>
 <body>
 <div class="container">
-	<form name = "createUserForm" onsubmit = "createUser()">
+	<form name = "createUserForm" onsubmit = "return createUser()">
         <h2>Create User</h2>
 	        <div class="row form-group">
 	        	<div class="col-md-5 col-sm-5">
 		        	<label>First Name</label>
-		        	<input type="text" class="form-control" placeholder="First Name" required="true"/>
+		        	<input type="text" id="fn" class="form-control" placeholder="First Name" required="true"/>
 	        	</div>
 	        	<div class="col-md-5 col-sm-5">
 		        	<label>Last Name</label>
-		        	<input type="text" class="form-control" placeholder="Last Name" required="true"/>
+		        	<input type="text" id="ln" class="form-control" placeholder="Last Name" required="true"/>
 	        	</div>
 	        </div>
 	        <div class="row form-group">
 	        	<div class="col-md-5 col-sm-5">
 		        	<label>Address</label>
-		        	<input type="text" class="form-control" placeholder="Address" required="true"/>
+		        	<input type="text" id="add" class="form-control" placeholder="Address" required="true"/>
 	        	</div>
 	        	<div class="col-md-5 col-sm-5">
 		        	<label>City</label>
-		        	<input type="text" class="form-control" placeholder="City" required="true"/>
+		        	<input type="text" id="city" class="form-control" placeholder="City" required="true"/>
 	        	</div>
 	        </div>
 	        <div class="row form-group">
 	        	<div class="col-md-5 col-sm-5">
 		        	<label>Email</label>
-		        	<input type="email" class="form-control" placeholder="Email" required="true"/>
+		        	<input type="email" id="email" class="form-control" placeholder="Email" required="true"/>
 	        	</div>
 	        	<div class="col-md-5 col-sm-5">
 		        	<label>Phone</label>
-		        	<input type="text" class="form-control" placeholder="Phone" required="true"/>
+		        	<input type="text" id="ph" class="form-control" placeholder="Phone" required="true"/>
 	        	</div>
 	        </div>
 	        <div class="row form-group">
