@@ -20,15 +20,22 @@ function createUser(){
 
 }
 function signIn(){
-	specificUser($('#inputEmail').val()).
+	return specificUser($('#inputEmail').val()).
 	then((response)=>{
 		if(response.hasOwnProperty($('#inputEmail').val())){
-			window.location = "user-list.html";
-			return false;
+			
+			return 1;
+			//return false;
+			
+			//return new Promise((resolve,reject)=>{resolve("user-list.html");});
+			
 		}
 		else{
-			window.location = "create-user.html";
-			return false;
+			
+			//return new Promise((resolve,reject)=>{resolve("create-user.html");});
+			//window.location.href="create-user.html";
+			return 2;
+			
 		}
 	})
 	.catch((err)=>{

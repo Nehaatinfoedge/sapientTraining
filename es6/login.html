@@ -10,10 +10,36 @@
 <link rel="stylesheet" href='../css/bootstrap.min.css' media="screen" />
 <link rel="stylesheet" href='../css/base.css' media="screen" />
 <script src="../es6/js/singlePageApp.js"></script>
+<script type="text/javascript">
+	
+		$(document).ready(function(){
+			var flag = 0;
+    		$('#LF').on('submit', function(e){
+				signIn(e).then((pp)=>{flag = pp; setTimeout(myfunc(pp,e),10000)});
+				
+				function myfunc(pp,e){
+					e.preventDefault();
+					if(pp==1){
+						window.location.replace('user-list.html');
+						//window.location = 'user-list.html';
+						return false;
+					}else{
+						window.location.replace('create-user.html');
+						return false;
+					}
+				}
+				/*.then((path)=>{
+					window.location.href=path;
+					return false;
+				})
+				.catch(()=>{});*/
+		});
+    	});
+</script>
 </head>
 <body>
 <div class="container">
-	<form name = "loginForm" onsubmit = "return signIn()">
+	<form name = "loginForm" id="LF">
         <h2>Please sign in</h2>
 	        <div class="row form-group">
 	        	<div class="col-md-5 col-sm-5">
