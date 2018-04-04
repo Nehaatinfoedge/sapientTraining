@@ -26,4 +26,28 @@ function findSecondSmallElement(input){
 	
 }
 var t = findSecondSmallElement(arr);
-console.log(t);
+console.log("smallest and second smallest element in the array are >>>>",t);
+
+var str = "aabbccdde";
+function calculateuniqueCharacter(input){
+	if(input == "")
+		return false;
+	var Arr = input.split("")
+		, result={}
+		, out = [];
+	for(var i=0;i<Arr.length;i++){
+		if(result[Arr[i]]==undefined)
+			result[Arr[i]] = 1;
+		else
+			result[Arr[i]] = result[Arr[i]] + 1;
+	}
+
+  console.log(result);
+  $.each(result,function(k,v){
+  	if(v==1)
+  		out.push(k);
+  });
+  return out;
+}
+var u = calculateuniqueCharacter(str);
+console.log("unique elements in the input are >>>>",u);
