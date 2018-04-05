@@ -1,3 +1,6 @@
+---------------------------------------------------------------------------
+Q1
+---------------------------------------------------------------------------
 var arr = [13,11,12,8,6,13];
 function findSecondSmallElement(input){
 	if(input.constructor === Array && input.length){
@@ -52,7 +55,24 @@ function calculateuniqueCharacter(input){
 var u = calculateuniqueCharacter(str);
 console.log("unique elements in the input are >>>>",u);
 
+---------------------------------------------------------------------------
+Q5
+---------------------------------------------------------------------------
+function firstNonRepeatedCharacter(string) {
+    for (var i = 0; i < string.length; i++) {
+        var c = string.charAt(i);
+        if (string.indexOf(c) == i && string.indexOf(c, i + 1) == -1) {
+            return c;
+        }
+    }
+    return null;
+}
 
+var someString = 'aabcbd';
+console.log(firstNonRepeatedCharacter(someString));
+---------------------------------------------------------------------------
+Q6
+---------------------------------------------------------------------------
 
 function longest_substring_without_repeating_characters(input) {
 	var chars = input.split('');
@@ -87,3 +107,7 @@ function longest_substring_without_repeating_characters(input) {
 console.log(longest_substring_without_repeating_characters("google.com")); 
 
 console.log(longest_substring_without_repeating_characters("example.com"));
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+11) Given a String “aabbbbddcc” find the longest first repeating index and its length.  (Input: “aabbbbddcc”  Output: [2,4] 2 is the index and 4 is the length).
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
