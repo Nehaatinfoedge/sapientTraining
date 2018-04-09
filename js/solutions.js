@@ -1129,6 +1129,69 @@ function missingChars(input){
 var str = "The quick brown fox jumps "
                  "over the dog";
 missingChars(str);
+
+-------------------------------------------------------------------------------
+16) Given Input,print the following input: “SSSSSTTPPQ”  Output: “5S2T2P1Q”.
+-------------------------------------------------------------------------------
+
+function printDesiredOutput(input){
+	if(input=='')
+		return false;
+	var arr = input.split("");
+	var present = {};
+	var output = '';
+	for(var i =0;i<arr.length;i++){
+		var s = arr[i];
+		if(present.hasOwnProperty(s)){
+			present[s] = present[s] + 1;
+		}
+		else {
+			present[s] = 1;
+		}
+	}
+	console.log(present);
+	for(key in present){
+		output += present[key]+''+key;
+	}
+	return output;
+	
+}
+var o  = printDesiredOutput("SSSSSTTPPQ");
+console.log(o);
+
+
+-------------------------------------------------------------------------------------------------
+10) Return element from a Pascal Traingle - Given 5,2 as input return 2 nd element from 5th row 
+-------------------------------------------------------------------------------------------------
+'use strict';
+
+function createPascalTriangle (numRows) {
+	this.numRows = numRows;
+	this.pascalTriangle = [];
+};
+createPascalTriangle.prototype.create = function(){
+  for (var i = 0; i < this.numRows; i++) { 
+    this.pascalTriangle[i] = new Array(i+1);
+    
+    for (var j = 0; j < i+1; j++) {            
+      if (j === 0 || j === i) {
+        this.pascalTriangle[i][j] = 1;
+      } else {
+        this.pascalTriangle[i][j] = this.pascalTriangle[i-1][j-1] + this.pascalTriangle[i-1][j];
+      }
+    }
+  }
+  return this.pascalTriangle;
+}
+
+createPascalTriangle.prototype.search = function(x,y){
+	return this.pascalTriangle[x][y];
+}
+var p = new createPascalTriangle(6);
+console.log(p.create());
+console.log(p.search(2,1));
+
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 11) Given a String “aabbbbddcc” find the longest first repeating index and its length.  (Input: “aabbbbddcc”  Output: [2,4] 2 is the index and 4 is the length).
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
