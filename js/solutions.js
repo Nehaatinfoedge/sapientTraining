@@ -575,6 +575,9 @@ function dotp(x,y) {
 dotp([1,3,-5],[4,-2,-1]); // ==> 3
 
 -----------------------------------------------------------------------------------------------------------------
+34) find lonest word in given dictionary
+   example : dictionary is : {"to","toe","toes","doe","dog","god","dogs","book","banana"} and input String is "dsetog"
+            output : toes, dogs
 
 -----------------------------------------------------------------------------------------------------------------
 
@@ -582,9 +585,10 @@ function isSubsequenceOf(sequence, word) {
   if (typeof sequence !== "string") { console.log("error"); }
   if (typeof word !== "string") { console.log("error"); }
 
-  sequenceIndex = 0;
+  
   for (character of word)
   {
+  	sequenceIndex = 0;
     characterFound = false;
     while (!characterFound)
     {
@@ -602,6 +606,9 @@ function isSubsequenceOf(sequence, word) {
 
 input = "dsetog";
 dictionary = ["to","toe","toes","doe","dog","god","dogs","book","banana"];
+
+input = "abppplee";
+dictionary = ["able", "ale", "apple", "bale", "kangaroo"];
 
 console.log();
 console.log("Input: ", input);
@@ -627,20 +634,501 @@ dictionary.sort(
 
 console.log();
 console.log("Sorted Dictionary: ", dictionary);
-
+var len = 0;
 for (word of dictionary)
 {
   if (isSubsequenceOf(input, word))
   {
-    console.log();
-    console.log("Solution: ", word);
-    break;
+  	if(len<=word.length){
+  		len = word.length;
+    	console.log();
+    	console.log("Solution: ", word);
+    	
+    }else{break;}
   }
 }
 
 console.log();
 console.log(" === END === ");
 
+
+
+-------------------------------------------------------------------------------------------------
+35) reverse LinkedList
+-------------------------------------------------------------------------------------------------
+
+function Node(data) {
+    this.data = data;
+    this.next = null;
+}
+
+function SinglyList(node) {
+	if (node) {
+        this.head = node;
+    } else {
+        this.head = null;
+    }
+    this._length = 0;
+}
+
+SinglyList.prototype.add = function(value) {
+    var node = new Node(value),
+        currentNode = this.head;
+ 
+    // 1st use-case: an empty list 
+    if (!currentNode) {
+        this.head = node;
+        this._length++;
+         
+        return node;
+    }
+ 
+    // 2nd use-case: a non-empty list
+    while (currentNode.next) {
+        currentNode = currentNode.next;
+    }
+ 
+    currentNode.next = node;
+ 
+    this._length++;
+     
+    return node;
+};
+
+SinglyList.prototype.searchNodeAt = function(position) {
+    var currentNode = this.head,
+        length = this._length,
+        count = 1,
+        message = {failure: 'Failure: non-existent node in this list.'};
+ 
+    // 1st use-case: an invalid position 
+    if (length === 0 || position < 1 || position > length) {
+        throw new Error(message.failure);
+    }
+ 
+    // 2nd use-case: a valid position 
+    while (count < position) {
+        currentNode = currentNode.next;
+        count++;
+    }
+ 
+    return currentNode;
+};
+
+SinglyList.prototype.remove = function(position) {
+    var currentNode = this.head,
+        length = this._length,
+        count = 0,
+        message = {failure: 'Failure: non-existent node in this list.'},
+        beforeNodeToDelete = null,
+        nodeToDelete = null,
+        deletedNode = null;
+ 
+    // 1st use-case: an invalid position
+    if (position < 0 || position > length) {
+        throw new Error(message.failure);
+    }
+ 
+    // 2nd use-case: the first node is removed
+    if (position === 1) {
+        this.head = currentNode.next;
+        deletedNode = currentNode;
+        currentNode = null;
+        this._length--;
+         
+        return deletedNode;
+    }
+ 
+    // 3rd use-case: any other node is removed
+    while (count < position) {
+        beforeNodeToDelete = currentNode;
+        nodeToDelete = currentNode.next;
+        count++;
+    }
+ 
+    beforeNodeToDelete.next = nodeToDelete.next;
+    deletedNode = nodeToDelete;
+    nodeToDelete = null;
+    this._length--;
+ 
+    return deletedNode;
+};
+
+SinglyList.prototype.print = function(){
+
+	var arr = [];
+    var current = this.head;
+    while (current !== null) {
+        arr.push(current.data.data);
+        current = current.next;
+    }
+    console.log(arr.join(' '));
+}
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+/* Iterative */
+SinglyList.prototype.reverseList = function() {
+    var result = null;
+    var stack = [];
+    
+    var current = this.head;
+    while (current) {
+        stack.push(current.data.data);
+        current = current.next;
+    }
+    
+    // Set head to end of list.
+    result = stack.pop() || [];
+    current = result;
+    
+    while (current) {
+        current.next = stack.pop();
+        current = current.next;
+    }
+
+    return result;
+};
+
+/* Recursive */
+SinglyList.prototype.reverseListRecursive = function() {
+  if (this.head === null || this.head.next === null) {
+        return;
+    }
+    var first = this.head;
+    var rest = new SinglyList(this.head.next);
+    rest.reverseListRecursive();
+    first.next.next = first;
+    first.next = null;
+    this.head = rest.head;
+}
+
+var list = new SinglyList();
+list.add(new Node(4));
+list.add(new Node(3));
+list.add(new Node(2));
+list.add(new Node(1));
+list.print();
+
+list.reverseListRecursive();
+list.print();
+
+----------------------------------------------------------------------------------------------------------------------------------------
+22) find number whether given no. is power of 10 or not. Example :- 100(10^2), 1000 (10^3), 0.1 (10^-1), 0.01(10^-2)
+----------------------------------------------------------------------------------------------------------------------------------------
+
+function isPowerOf10(input){
+	if(!input){
+		console.log("Please enter valid input");	}
+	while (input > 9 && input % 10 == 0) {
+  		input /= 10;
+  	}
+	return (input == 1)?1:0;
+}
+isPowerOf10(100);
+
+----------------------------------------------------------------------------------------------------------------------------------------
+29) optimal path
+----------------------------------------------------------------------------------------------------------------------------------------
+
+var res = "";
+function Graph() {
+  var neighbors = this.neighbors = {}; // Key = vertex, value = array of neighbors.
+
+  this.addEdge = function (u, v) {
+    if (neighbors[u] === undefined) {  // Add the edge u -> v.
+      neighbors[u] = [];
+    }
+    neighbors[u].push(v);
+    if (neighbors[v] === undefined) {  // Also add the edge v -> u in order
+      neighbors[v] = [];               // to implement an undirected graph.
+    }                                  // For a directed graph, delete
+    neighbors[v].push(u);              // these four lines.
+  };
+
+  return this;
+}
+
+function bfs(graph, source) {
+  var queue = [ { vertex: source, count: 0 } ],
+      visited = { source: true },
+      tail = 0;
+  while (tail < queue.length) {
+    var u = queue[tail].vertex,
+        count = queue[tail++].count;  // Pop a vertex off the queue.
+    print('distance from ' + source + ' to ' + u + ': ' + count);
+    graph.neighbors[u].forEach(function (v) {
+      if (!visited[v]) {
+        visited[v] = true;
+        queue.push({ vertex: v, count: count + 1 });
+      }
+    });
+  }
+}
+
+function shortestPath(graph, source, target) {
+  if (source == target) {   // Delete these four lines if
+    print(source);          // you want to look for a cycle
+    return;                 // when the source is equal to
+  }                         // the target.
+  var queue = [ source ],
+      visited = { source: true },
+      predecessor = {},
+      tail = 0;
+  while (tail < queue.length) {
+    var u = queue[tail++],  // Pop a vertex off the queue.
+        neighbors = graph.neighbors[u];
+    for (var i = 0; i < neighbors.length; ++i) {
+      var v = neighbors[i];
+      if (visited[v]) {
+        continue;
+      }
+      visited[v] = true;
+      if (v === target) {   // Check if the path is complete.
+        var path = [ v ];   // If so, backtrack through the path.
+        while (u !== source) {
+          path.push(u);
+          u = predecessor[u];
+        }
+        path.push(u);
+        path.reverse();
+        print(path.join(' &rarr; '));
+        return;
+      }
+      predecessor[v] = u;
+      queue.push(v);
+    }
+  }
+  print('there is no path from ' + source + ' to ' + target);
+}
+
+function print(s) {  // A quick and dirty way to display output.
+  s = s || '';
+  document.getElementById('display').innerHTML += s + '<br>';
+}
+
+window.onload = function () {
+  var graph = new Graph();
+  graph.addEdge('A', 'B');
+  graph.addEdge('B', 'C');
+  graph.addEdge('B', 'E');
+  graph.addEdge('C', 'D');
+  graph.addEdge('C', 'E');
+  graph.addEdge('C', 'G');
+  graph.addEdge('D', 'E');
+  graph.addEdge('E', 'F');
+
+  bfs(graph, 'A');
+  print();
+  shortestPath(graph, 'B', 'G');
+  print();
+  shortestPath(graph, 'G', 'A');
+};
+
+--------------------------------------------------------------------------------------------------------------------------------
+31) walking robot  
+ Problem statement
+ Given a robot which can only move in four directions, UP(U), DOWN(D), LEFT(L), RIGHT(R). Given a string consisting of instructions to move.
+  Output the co-ordinates of robot after the executing the instructions. Initial position of robot is at origin(0, 0).
+
+Examples:
+
+Input : move = "UDDLRL" 
+Output : (-1, -1)
+Move U : (0, 0)--(0, 1)
+Move D : (0, 1)--(0, 0)
+Move D : (0, 0)--(0, -1)
+Move L : (0, -1)--(-1, -1)
+Move R : (-1, -1)--(0, -1)
+Move L : (0, -1)--(-1, -1)
+
+Therefore final position after the complete
+movement is: (-1, -1)
+
+Input : move = "UDDLLRUUUDUURUDDUULLDRRRR"
+Output : (2, 3) 
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+var input = "UDDLLRUUUDUURUDDUULLDRRRR";
+function findFinalOutputOfRobot(input){
+	var obj = {x:0,y:0};
+	var str = input.split("");
+	if(input=''){
+		console.log("Please enter valid input");
+		return false;
+	}
+	for(var i=0;i<str.length;i++){
+		if(['U','D','L','R'].indexOf(str[i])===-1){
+			console.log("Please enter valid movement");
+			return false;
+		}
+		switch(str[i]) {
+			case 'U':
+				obj.y += 1;
+			break;
+			case 'D':
+				obj.y += -1;
+			break;
+			case 'L':
+				obj.x += -1;
+			break;
+			case 'R':
+				obj.x += 1;
+			break;
+		}
+	}
+	return obj;
+}
+
+var result = findFinalOutputOfRobot(input);
+console.log(result);
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+24)  /* Problem Name is &&& Square Root &&& PLEASE DO NOT REMOVE THIS LINE. */
+ 
+* Instructions to Candidate
+* This is **NOT** a math problem. You are required to code up a simple mathematical technique to find the square root of a number.
+* The Newton-Raphson method can be used to find the square root of a number N as follows
+    ** Make an initial guess
+    ** Update the guess using the below formula
+    ** New Estimate = Current Estimate - ( F(Current Estimate) / F'(Current Estimate) ), where
+     F(Current Estimate) = Current Estimate * Current Estimate - N
+     F'(Current Estimate) = 2*Current Estimate
+    ** Repeat till you are close enough
+* Run this code in the REPL to observe its behaviour. The
+   execution entry point is main().
+
+/*One approach is to use Newton's Method, which provides a convergent numerical approximation (with the caveat that you 
+choose an initial guess that is 'close enough' to the real solution; in this sense, doing so for large numbers gets more difficult).
+
+Newton's Method is based upon finding roots of a function f(x). To see how this applies to square or cube roots, suppose
+ that y=n−−√ for some fixed n. Well, then this y would be a root of the equation f(x)=x2−n. Similarly, f(x)=x3−n would provide 
+ us with a way to calculate the cube root of n.
+
+Newton's Method works as follows: start with an initial guess x0, and then, for each n, define xn+1:=xn−f(xn)f′(xn).
+
+Take the simple example of calculating 10−−√. We use f(x)=x2−10 with Newton's Method to find this. In this case, f′(x)=2x. 
+Letting out initial guess be x0=3 (32=9 which is close to 10), we have x1=3−32−102(3)=3+1/6=19/6. Then x2=19/6−(19/6)2−1019/3≈3.16228. For comparison, 
+10−−√≈3.162277, which is already very close to 3.16228.*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+function sqrt(x){
+  
+  function mean(a,b){
+    return (a + b) / 2
+  }
+
+  function newEstimate(estimate){
+    return mean( estimate, x / estimate )
+  }
+
+  function isAproxRoot(estimate){
+    return Math.abs(estimate * estimate -x) <= 0.01
+  }
+  
+  function iterate(estimate){
+    return isAproxRoot(estimate) ? estimate : iterate(newEstimate(estimate))
+  }
+
+  return iterate(1);
+  
+}
+sqrt(10);
+
+
+/*function sqrt(x){
+	var i =1;
+	function calculateOne(num){
+		return Math.abs((num*num)-x);
+	}
+	function calculateTwo(num){
+		return Math.abs(2*num);
+	}
+	function iterate(i){
+		var x1 = calculateOne(i);
+		var x2 = calculateTwo(1);
+		return (Math.abs(i-((x1)/(x2))))<=0.01?Math.abs(i-((x1)/(x2))):iterate(Math.abs(i-((x1)/(x2))));
+	}
+	return iterate(i);
+
+}
+sqrt(10);*/
+-----------------------------------------------------------------------------------------------------
+14) Missing characters to make a string Pangram 
+-----------------------------------------------------------------------------------------------------
+
+function missingChars(input){
+	var present = []
+		, missing = [];
+	var s = 'a';
+	var smallACharCode = (s.charCodeAt(0));
+	s = 'z';
+	var smallZCharCode = (s.charCodeAt(0));
+	s = 'A';
+	var capitalACharCode = (s.charCodeAt(0));
+	s = 'Z';
+	var capitalZCharCode = (s.charCodeAt(0));
+	if(input=='')
+		return false;
+	var arr = input.split("");
+	if(smallACharCode< smallZCharCode){
+		var source = smallACharCode;
+		var target = smallZCharCode;
+	}
+	else
+	{
+		var source = smallZCharCode;
+		var target =  smallACharCode;
+	}
+	
+	for(var i = source;i<target;i++){
+		var charTobeChecked = String.fromCharCode(i);
+		if(arr.indexOf(charTobeChecked) !== -1){
+			present.push(charTobeChecked);
+		}
+		else{
+			missing.push(charTobeChecked)
+		}
+
+	}
+	if(capitalACharCode< capitalZCharCode){
+		var source = capitalACharCode;
+		var target = capitalZCharCode;
+	}
+	else
+	{
+		var source = capitalZCharCode;
+		var target =  capitalACharCode;
+	}
+	
+	for(var i = source;i<target;i++){
+		var charTobeChecked = String.fromCharCode(i);
+		if(arr.indexOf(charTobeChecked) !== -1){
+			present.push(charTobeChecked);
+		}
+		else{
+			missing.push(charTobeChecked)
+		}
+
+	}
+	
+	console.log(present);
+	console.log(missing);
+}
+var str = "The quick brown fox jumps "
+                 "over the dog";
+missingChars(str);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 11) Given a String “aabbbbddcc” find the longest first repeating index and its length.  (Input: “aabbbbddcc”  Output: [2,4] 2 is the index and 4 is the length).
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
