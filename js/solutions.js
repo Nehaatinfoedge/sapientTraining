@@ -1638,9 +1638,9 @@ console.log(largest(a));
  
     console.log(countWays(3));
 
-    ---------------------------------------------------
-
-    ---------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------
+    23) find the length of minimum sub Array exceeding sum. ex: input : array is {1,2,3,4} sum = 6, output:length 2 
+    ------------------------------------------------------------------------------------------------------------------
     // Utility function to find minimum of two numbers
 	function min( x,  y) {
 	    return (x < y) ? x : y;
@@ -1704,4 +1704,115 @@ console.log(largest(a));
         console.log("Smallest sub-array length is "+ len);
     else
         console.log("No sub-array exists");
+
+
+    ---------------------------------------------------------------------------------
+    smallest element in sorted rotated array
+    ---------------------------------------------------------------------------------
+
+    function findMinimum( arr, low,  high)
+	{
+		var mid = (low + high)/2;
+		//when array is not rotated at all
+		if (arr[high] > arr[low])
+		{
+			return arr[0];
+		}
+		//if there is only one element
+		if (high == low)
+		{
+			return arr[low];
+		}
+		//if the element (mid + 1) is the minimum
+		if (mid< high && arr[mid+1] <arr[mid])
+		{
+			return arr[mid+1];
+		}
+		//If the mid element is the minimum
+		if (mid > low && arr[mid] <arr[mid-1])
+		{
+			return arr[mid];
+		}
+		//search in the left half
+		if (arr[high]>arr[mid])
+		{
+			return findMinimum(arr, low, mid-1);
+		}
+		//search in the right half
+		else
+		{
+			return findMinimum(arr,mid+1,high);
+		}
+	}
+
+	var arr =  [5,6,7,1,2,3,4];  //creating an array
+    var n = arr.length ;//size of the array
+    console.log("The minimum element is "+findMinimum(arr,0,n-1));
+
+---------------------------------------------------------------------------------
+   2) 2nd smallest element of a sorted rotated array. E.g. 5,6,1,2,3,4
+---------------------------------------------------------------------------------
+
+
+	Object.size = function(obj) {
+	    var size = 0, key;
+	    for (key in obj) {
+	        if (obj.hasOwnProperty(key)) size++;
+	    }
+	    return size;
+	};
+
+    function kthsmallest (arr,  low,  high,  k){
+	    for (;;) {
+	        if (low == high)
+	            return arr[low];
+
+	        var pos = partition (arr, low, high);
+
+	        if (k == pos)
+	            return arr[k];
+	        else if (k < pos)
+	            high = pos - 1;
+	        else
+	            low = pos + 1;
+	    }
+	}
+
+
+    var a = {'0':51,'1': 86,'2': 34,'3': 79,'4': 92, '5':68,'6': 14,'7': 47,'8': 22, '9':6 },
+        nelem = a.length;
+
+    for (var key in a)
+        console.log (" nth (%2d) element is : ", i,
+                kthsmallest (a, 0, Object.size(a) - 1, key));
+    console.log(kthsmallest (a, 0, Object.size(a) - 1, 1))
+
+
+
+function swap ( a,  b , obj)
+{
+    var temp = obj[b];
+    obj[b] = obj[a];
+    obj[a] = temp;
+}
+
+function partition ( arr,  l,  r)
+{
+    var pivot = arr[r];
+    var i = l
+    	, j = 0;
+
+    for (j = l; j <= r - 1; j++) {
+        if (arr[j] <= pivot) {
+            swap (i, j , arr);
+            i++;
+        }
+    }
+
+    swap (i, j, arr);
+
+    return i;
+}
+
+
 
