@@ -1473,6 +1473,9 @@ console.log(out[0]+"/"+out[1]);
 abc();
     
 -------------------------------------------------------------------------
+33) find unique tuples(substring) of given length  
+ Example : input : "aab" find 2 length substring output : aa,ab
+            input "abcd" find 2 length substring output : ab, bc,cd
 
 -------------------------------------------------------------------------
 
@@ -1528,6 +1531,177 @@ abc();
     var ch = "abefbaa";
     var k = 3;
     countkDist(ch, k);
+
+    ----------------------------------------------------------------------------------------------------------------------------------------------
+    27) Average grade problem  input [ ["sobby",87], ["charles", 37],["tony", 24],["charles",22]] , here best grade is 87 which is output --- Done
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+
+    function averageGrade(inp){
+    	var a =[];
+    	if(inp.length==0){
+    		console.log("Please enter valid input");
+    		return false;
+    	}
+    	for(var key in inp){
+    		//console.log(inp[key]);
+    		
+    			a[key] = inp[key][1];
+    		
+    	}
+    	//console.log(a);
+    	return a;
+    }
+    var input = {'0': ["sobby",87], '1':["charles", 37],'2':["tony", 24],'3':["charles",22]};
+    Math.max(...averageGrade(input));
+
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 11) Given a String “aabbbbddcc” find the longest first repeating index and its length.  (Input: “aabbbbddcc”  Output: [2,4] 2 is the index and 4 is the length).
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+var hash = {};
+function longest_substring(input) {
+	var chars = input.split('');
+	var curr_char;
+	var str = "";
+	var longest_string = "";
+	
+	for (var i = 0; i < chars.length; i++) {
+		curr_char = chars[i];
+		if (hash[chars[i]] && hash[chars[i]].index === i-1) 
+		{ 
+		
+			str += curr_char; 
+			hash[chars[i]] = {index:i};
+		}
+		else 
+		{
+		
+			if(longest_string.length <= str.length)
+			{
+				longest_string = str;
+			}
+			
+			hash[input.charAt(i)] = {index:i};
+			str = input.charAt(i); 
+		}
+	}
+	return longest_string.length > str.length ? longest_string : str;
+}
+var o = longest_substring("aabbbbddccllddkkkkkkkdpp");
+console.log(o);
+console.log(((hash[o.split("")[0]].index) - o.split("").length)+1);
+
+------------------------------------------------------------------------------------------------------------------------------------
+12) Arrange given numbers to form the biggest number.Input- List of numbers : {1, 34, 3, 98, 9, 76, 45, 4}   Output – 998764543431
+-------------------------------------------------------------------------------------------------------------------------------------
+
+function largest(arr) {
+  	var n = "";
+  
+	 arr = arr.map(function(ele) {
+	  	return ele + '';
+	});
+
+  	arr.sort(function(a, b){
+    	var ab = a + b;
+    	var ba = b + a;
+    	return ab > ba ? -1 : 1;
+  	});
+
+  	for (var i = 0; i < arr.length; i++) {
+   	 n += arr[i];
+  	}
+  	
+  	return n;
+}
+
+var a = ['1', '34', '3', '98', '9', '76', '45', '4'];
+var b = [1, 34, 3, 98, 9, 76, 45, 4];
+
+console.log(largest(a));
+
+-------------------------------------------------------------------
+25) stair case problem
+-------------------------------------------------------------------
+  function fib(n)
+    {
+       if (n <= 1)
+          return n;
+       return fib(n-1) + fib(n-2);
+    }
+     
+    function countWays(s)
+    {
+        return fib(s + 1);
+    }
+ 
+ 
+    console.log(countWays(3));
+
+    ---------------------------------------------------
+
+    ---------------------------------------------------
+    // Utility function to find minimum of two numbers
+	function min( x,  y) {
+	    return (x < y) ? x : y;
+	}
+
+	// Function to find the length of smallest subarray whose sum 
+	// of elements is greater than the given number
+	function smallestSubarray( arr, n, k)
+	{
+	    // stores the current window sum
+	    var windowSum = 0;
+
+	    // stores the result
+	    var  len = Number.MAX_SAFE_INTEGER;
+
+	    // stores window's starting index
+	    var left = 0;
+
+	    // maintain a sliding window [left..right]
+	    for (var right = 0; right < n; right++)
+	    {
+	        // include current element in the window
+	        windowSum += arr[right];
+
+	        // (to handle negative numbers in the array)
+	        // if window's sum becomes negative, discard the window
+	        if (windowSum <= 0) // Kadane's algorithm
+	        {
+	            left = right;
+	            windowSum = 0;
+	        }
+
+	        // window becomes unstable if its sum becomes more than k
+	        while (windowSum > k && left <= right)
+	        {
+	            // update the result if current window's length is less
+	            // than minimum found so far
+	            len = Math.min(len, right - left + 1);
+
+	            // remove elements from the window's left side till window
+	            // becomes stable again
+	            windowSum -= arr[left];
+	            left++;
+	        }
+	    }
+
+	    // return result
+	    return len;
+	}
+
+
+    var arr = [1, 2, 3, 4, 5, 6, 7, 8 ];
+    var k = 11;   // positive number
+
+    var n = arr.length;
+
+    // find length of the smallest sub-array
+    var len = smallestSubarray(arr, n, k);
+
+    if (len != Number.MAX_SAFE_INTEGER)
+        console.log("Smallest sub-array length is "+ len);
+    else
+        console.log("No sub-array exists");
+
