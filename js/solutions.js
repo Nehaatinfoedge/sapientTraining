@@ -1191,7 +1191,343 @@ var p = new createPascalTriangle(6);
 console.log(p.create());
 console.log(p.search(2,1));
 
+--------------------------------------------------------------------------------------------------------
+7) Print matrix in spiral form e.g. {{1,2,3},{4,5,6},{7,8,9}} Output . 1,2,3,6,9,8,7,4,5
+--------------------------------------------------------------------------------------------------------
 
+var input = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]]; 
+
+var spiralTraversal = function(matriks){
+  var result = [];
+    var goAround = function(matrix) {
+        if (matrix.length == 0) {
+            return;
+        }
+
+        // right
+        result = result.concat(matrix.shift());
+
+        // down
+        for (var j=1; j < matrix.length - 1; j++) {
+            result.push(matrix[j].pop());
+        }
+
+        // bottom
+        result = result.concat(matrix.pop().reverse());
+
+        // up
+        for (var k=matrix.length -2; k > 0; k--) {
+            result.push(matrix[k].shift());
+        }
+
+        return goAround(matrix);
+    };
+
+    goAround(matriks);
+
+    return result;
+};
+var result = spiralTraversal(input);
+
+console.log('result', result);
+
+----------------------------------------------------------------------------------------------------------------
+4) Minimum distance between 2 words counting the number of characters from middle of both words. 
+E.g. ABC is XYZ and ABC & XYZ are two distinct words. Minimum distance between ABC and XYZ
+------------------------------------------------------------------------------------------------------
+var mid1 = 0;
+var mid2 = 0;
+var temp1 = 0;
+var temp2 = 0;
+var increment = 0;
+var decrement = 0;
+var difference = 0;
+var diffArray = [];
+function calculateDistanceBetweenTwoStrings(sourceString,destinationString,mid1,mid2){
+	var a1 = sourceString.split("");
+	var a2 = destinationString.split("");
+	
+	if((mid1 >= a1.length && mid2 >= a2.length) || (a1.length != a2.length)){
+		return false;
+	}
+	if(!mid1 && !mid2 && !temp1 && !temp2){
+		if(a1%2==0){
+			mid1 = Math.abs((a1.length%2));
+		}
+		else{
+			mid1 = Math.abs((a1.length%2)+1);
+		}
+		if(a2%2==0){
+			mid2 = Math.abs((a2.length%2));
+		}
+		else{
+			mid2 = Math.abs((a2.length%2)+1);
+		}
+		debugger;
+		temp1 = mid1;
+		temp2 = mid2;
+		decrement = 1;
+	}
+	else{
+		debugger;
+		if(decrement)
+		{
+			mid1 = Math.abs(mid1 -1);
+			mid2 = Math.abs(mid2 - 1);
+			if(mid1==0 && mid2==0){
+				decrement = 0;
+				increment = 1;
+			}
+		}
+		else{
+			if(!mid1 && !mid2){
+				mid1 = temp1;
+				mid2 = temp2;
+			}
+			mid1 = Math.abs(mid1+1);
+			mid2 = Math.abs(mid2+1);
+		}
+	}
+	function calculatedifference(mid1,mid2){
+		if(mid1==0 || mid2 ==0)
+			return; 
+		var ac1 = sourceString.charCodeAt(mid1-1);
+		var ac2 = destinationString.charCodeAt(mid2-1);
+		if(ac1>ac2){
+			
+			console.log(ac1 - ac2);
+			diffArray.push(ac1 - ac2);
+			difference =  (ac1 - ac2) > difference ?(ac1 - ac2):difference;
+		}
+		else{
+			
+			console.log(ac2 - ac1);
+			diffArray.push(ac2 - ac1);
+			difference =  (ac2 - ac1) > difference ?(ac2 - ac1):difference;
+		}
+		
+		return difference;
+	}
+	calculatedifference(mid1,mid2);
+	calculateDistanceBetweenTwoStrings(sourceString,destinationString,mid1,mid2)
+	
+	
+}
+calculateDistanceBetweenTwoStrings("ABE","BYG",0,0);
+console.log(Math.min(...diffArray));
+
+
+----------------------------------------------------------------------------
+32) snow pack problem example :- input : int arr[] = {0, 1, 3, 0, 1, 2, 0,4, 2, 0, 3, 0}; output 13
+To understand snowpack go through this geeks for geeks problem  https://www.geeksforgeeks.org/trapping-rain-water/
+
+----------------------------------------------------------------------------
+
+function findWater(arr, n)
+{
+    // left[i] contains height of tallest bar to the
+    // left of i'th bar including itself
+    var left = [];
+ 
+    // Right [i] contains height of tallest bar to
+    // the right of ith bar including itself
+    var right = [];
+ 
+    // Initialize result
+    var water = 0;
+ 
+    // Fill left array
+    left[0] = arr[0];
+    for (var i = 1; i < n; i++){
+       left[i] = Math.max(left[i-1],arr[i]);
+    }
+ 
+    // Fill right array
+    right[n-1] = arr[n-1];
+    for (var i = n-2; i >= 0; i--){
+       right[i] = Math.max(right[i+1],arr[i]);
+    }
+ 
+    // Calculate the accumulated water element by element
+    // consider the amount of water on i'th bar, the
+    // amount of water accumulated on this particular
+    // bar will be equal to min(left[i], right[i]) - arr[i] .
+    for (var i = 0; i < n; i++){
+       water += Math.min(left[i],right[i]) - arr[i];
+    }
+ 
+    return water;
+}
+
+var ar = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+var n = ar.length;
+var output = findWater(ar, n);
+console.log(output);
+
+---------------------------------------------------------------------------
+21) Given a set of numbers identify pairs such that a^b = b^a  -- 
+---------------------------------------------------------------------------
+
+var inp = [1,2,4,5,6,3,9]
+, pairs = [];
+function calculatePairs(arr){
+	if(arr.length==0)
+	{
+		console.log("Please enter valid input");
+		return false;
+	}
+	
+	for(var i=0;i<arr.length;i++){
+		for(var j=i+1;j<arr.length;j++){
+				if(Math.pow(arr[i],arr[j]) === Math.pow(arr[j],arr[i]))
+					pairs.push(arr[i]+","+arr[j]);
+		}
+	}
+	return pairs;
+}
+ 
+calculatePairs(inp)
+
+
+------------------------------------------------------------------------------------------------
+13) Find out the number of pair from given integer array whose sum is equal to a given number.
+------------------------------------------------------------------------------------------------
+
+// Returns number of pairs in arr[0..n-1] with sum equal
+// to 'sum'
+function getPairsCount(arr,  n, sum)
+{
+    var count = 0; // Initialize result
+ 
+    // Consider all possible pairs and check their sums
+    for (var i=0; i<n; i++)
+        for (var j=i+1; j<n; j++)
+            if (arr[i]+arr[j] == sum)
+                count++;
+ 
+    return count;
+}
+ 
+// Driver function to test the above function
+
+var arr = [1, 5, 7, -1, 5];
+var n = arr.length;
+var sum = 6;
+getPairsCount(arr, n, sum);
+
+-----------------------------------------------------------------------
+8) Program to add two fractions
+-----------------------------------------------------------------------
+function abc(){
+var num1=1
+    , den1=500
+    , num2=2
+    , den2=1500
+    , den3
+    , num3;
+// Function to return gcd of a and b
+function gcd( a, b)
+{
+    if (a == 0)
+        return b;
+    return gcd(b%a, a);
+}
+ 
+// Function to convert the obtained fraction
+// into it's simplest form
+function lowest(den3, num3)
+{
+    // Finding gcd of both terms
+    var common_factor = gcd(num3,den3);
+ 
+    // Converting both terms into simpler 
+    // terms by dividing them by common factor 
+    den3 = den3/common_factor;
+    num3 = num3/common_factor;
+    return [num3,den3];
+}
+ 
+//Function to add two fractions
+function addFraction(num1, den1, num2, den2, num3, den3)
+{
+    // Finding gcd of den1 and den2
+    den3 = gcd(den1,den2);
+ 
+    // Denominator of final fraction obtained
+    // finding LCM of den1 and den2
+    // LCM * GCD = a * b 
+    den3 = (den1*den2) / den3;
+ 
+    // Changing the fractions to have same denominator
+    // Numerator of the final fraction obtained
+    num3 = (num1)*(den3/den1) + (num2)*(den3/den2);
+    // Calling function to convert final fraction
+    // into it's simplest form
+    var a = lowest(den3,num3);
+    return a;
+}
+var out = addFraction(num1, den1, num2, den2, num3, den3);
+console.log(out[0]+"/"+out[1]);
+};
+    
+abc();
+    
+-------------------------------------------------------------------------
+
+-------------------------------------------------------------------------
+
+
+// Function to count number of substrings
+    // with exactly k unique characters
+    function countkDist(str, k)
+    {
+        // Initialize result
+        var res = 0;
+ 
+        var n = str.split("").length;
+ 
+        
+        
+ 
+        // Consider all substrings beginning with
+        // str[i]
+        for (var i = 0; i < n; i++)
+        {
+            var dist_count = 0;
+ 
+      		var cnt = [];
+      		// To store count of characters from 'a' to 'z'
+	        for(var p=0;p<26;p++){
+	        	// Initializing count array with 0
+	        	cnt[p]=0;
+	           // cnt.fill(0);
+	        }
+            // Consider all substrings between str[i..j]
+            for (var j=i; j<n; j++)
+            {
+                // If this is a new character for this
+                // substring, increment dist_count.
+                if (cnt[str.charCodeAt(j) - 'a'.charCodeAt(0)] == 0)
+                    dist_count++;
+ 
+                // Increment count of current character
+                cnt[str.charCodeAt(j) - 'a'.charCodeAt(0)]++;
+ 
+                // If distinct character count becomes k,
+                // then increment result.
+                if (dist_count == k)
+                    res++;
+            }
+        }
+ 		console.log(res);
+        return res;
+    }
+ 
+    // Driver Program
+    
+    var ch = "abefbaa";
+    var k = 3;
+    countkDist(ch, k);
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 11) Given a String “aabbbbddcc” find the longest first repeating index and its length.  (Input: “aabbbbddcc”  Output: [2,4] 2 is the index and 4 is the length).
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
